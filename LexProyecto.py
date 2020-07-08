@@ -26,9 +26,21 @@ reservadas = {
 }
 
 
-tokens = [
+tokens = ["MENOS","MAS", "PRODUCTO",
+"DIVISION", "NUMERO", "LPAREN","RPAREN", "IGUAL", "POTENCIA",
 
 ] + list(reservadas.values())
+
+#Simbolos matematicos
+t_MENOS =r'\-'
+t_MAS =r'\+'
+t_PRODUCTO =r'\*'
+t_DIVISION =r'/'
+t_NUMERO=r'[0-9]+'
+t_LPAREN=r'\('
+t_RPAREN=r'\)'
+t_IGUAL =r'='
+t_POTENCIA =r'\*\*'
 
 
 t_IF       = r'if'
