@@ -27,7 +27,8 @@ reservadas = {
 
 
 tokens = ["MENOS","MAS", "PRODUCTO",
-"DIVISION", "NUMERO", "LPAREN","RPAREN", "IGUAL", "POTENCIA",
+"DIVISION", "NUMERO", "LPAREN","RPAREN", "IGUAL", "POTENCIA", "AND", "OR", "NOT", 
+"IGUAL2", "IGUAL3", "NOIGUAL"
 
 ] + list(reservadas.values())
 
@@ -41,6 +42,13 @@ t_LPAREN=r'\('
 t_RPAREN=r'\)'
 t_IGUAL =r'='
 t_POTENCIA =r'\*\*'
+t_AND =r'&&'
+t_OR = r'\|\|'
+t_NOT =r'\!' 
+t_IGUAL2 =r'\=\='
+t_IGUAL3 =r'\=\=\='
+t_NOIGUAL=r'\!\='
+
 
 
 t_IF       = r'if'
