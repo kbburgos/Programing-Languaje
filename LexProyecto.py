@@ -181,7 +181,17 @@ print("\n\nPush Permitido\n")
 cadenaPush = 'variable.push("word")\n world.push(word)'
 prueba(cadenaPush)
 
+#Operadores Matematicos y logicos
+cadenaoperdores =[ "+", '-','*','/', '**', '&&', '||', '!', '!=', '==', '===']
 
+for i in cadenaoperdores:
+    prueba(i)
+
+print('\n')
+
+prueba("55 ==55\n")
+
+prueba('10 != 1')
 
 #Definir todos los tokens para operadores y símbolos válidos.
 
