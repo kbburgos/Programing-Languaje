@@ -32,7 +32,7 @@ tokens = ["MENOS","MAS", "PRODUCTO",
 
 ] + list(reservadas.values())
 
-#Simbolos matematicos
+#Simbolos matematicos y Operadores logicos
 t_MENOS =r'\-'
 t_MAS =r'\+'
 t_PRODUCTO =r'\*'
@@ -128,6 +128,22 @@ def t_SLICE(t):
 
 
 
+def prueba(cadena):
+    analizadorS= lex.lex()
+    analizadorS.input(cadena)
+
+    while True:
+        tokenRec = analizadorS.token()
+        if tokenRec!=None:
+            print(tokenRec)
+        else:
+            break    
+    
+    
+
+
+
+
 print('\nTest 1\n')
 entradas = ['if', 'else', 'while', 'for'
             'variable.sort()',
@@ -140,14 +156,7 @@ entradas = ['if', 'else', 'while', 'for'
             'variable.valueOf()']
 
 for i in entradas:
-    analizadorE = lex.lex()
-    analizadorE.input(i)
-    while True:
-        tokenRec = analizadorE.token()
-        if tokenRec != None:
-            print(tokenRec)
-        else:
-            break
+    prueba(i)
 
 
 
@@ -155,15 +164,7 @@ print("\n\nSlice Permitido\n")
 
 #slicePermitido
 cadenaSlice = '"hello brother".slice(3,1)\n variable.slice(1,4)'
-analizadorS= lex.lex()
-analizadorS.input(cadenaSlice)
-
-while True:
-    tokenRec = analizadorS.token()
-    if tokenRec!=None:
-        print(tokenRec)
-    else:
-        break
+prueba(cadenaSlice)
 
 
 
@@ -171,31 +172,14 @@ print("\n\nInclude Permitido\n")
 
 #includePermitido
 cadenaInclude = '"hello brother".include("word")\n variable.include("word")\n "hello world".include(word)'
-analizadorI= lex.lex()
-analizadorI.input(cadenaInclude)
-
-while True:
-    tokenRec = analizadorI.token()
-    if tokenRec!=None:
-        print(tokenRec)
-    else:
-        break
-
+prueba(cadenaInclude)
 
 
 print("\n\nPush Permitido\n")
 
 #pushPermitido
 cadenaPush = 'variable.push("word")\n world.push(word)'
-analizadorP= lex.lex()
-analizadorP.input(cadenaPush)
-
-while True:
-    tokenRec = analizadorP.token()
-    if tokenRec!=None:
-        print(tokenRec)
-    else:
-        break
+prueba(cadenaPush)
 
 
 
