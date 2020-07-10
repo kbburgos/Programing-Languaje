@@ -22,17 +22,19 @@ reservadas = {
     'copyWithing'    : 'COPYWHITIN',
     'new'            : 'NEW',
     'slice'          : 'SLICE',
-    'set'            : 'SET'
+    'set'            : 'SET',
+
 }
 
 
 tokens = ["MENOS","MAS", "PRODUCTO",
 "DIVISION", "NUMERO", "LPAREN","RPAREN", "IGUAL", "POTENCIA", "AND", "OR", "NOT", 
-"IGUAL2", "IGUAL3", "NOIGUAL"
+"IGUAL2", "IGUAL3", "NOIGUAL","FLOTANTE","CADENA","LISTA","PALABRA","BOOLEANO","OBJETO"
 
 ] + list(reservadas.values())
 
 #Simbolos matematicos y Operadores logicos
+t_BOOLEANO=r'true|false'
 t_MENOS =r'\-'
 t_MAS =r'\+'
 t_PRODUCTO =r'\*'
@@ -48,10 +50,18 @@ t_NOT =r'\!'
 t_IGUAL2 =r'\=\='
 t_IGUAL3 =r'\=\=\='
 t_NOIGUAL=r'\!\='
+t_FLOTANTE=r'[0-9]+.{1}[0-9]+'
+t_CADENA=r'\'[\w\s\W]*\''
+t_LISTA=r'\[[\w\s\W,?]*\]'
+t_PALABRA = r'[a-z$_][a-zA-Z0-9_]*'
+t_OBJETO= r'\{[\w\s\W,?]*:{1}[\w\s\W,?]*\}'
 
 
 
-t_IF       = r'if'
+
+
+
+t_IF     = r'if'
 t_FOR      = r'for'
 t_WHILE    = r'while'
 t_ELSE     = r'else'
@@ -59,6 +69,8 @@ t_ignore   = ' \t'
 t_ECHO     = r'echo'
 t_NEW      = r'new'
 t_SET      = r'set'
+
+
 
 def t_error(t):
     print("No se ha reconocido '%s'" % t.value[0])
@@ -125,6 +137,10 @@ def t_SLICE(t):
     r'(((")[\w\s?]+")|[\w]+)[\.]slice\(([\d]+,\s?[\d]+)\)|(;$)'
     t.type = reservadas.get(t.value, 'SLICE')
     return t
+
+
+
+
 
 
 
@@ -200,3 +216,11 @@ prueba('10 != 1')
 #Realizar pruebas para tokenizar sus componentes. Al menos 3 ejemplos de líneas válidas por cada integrante.
 
 #Subir a sidweb su analizador lexico.py validado, los ejemplos comprobados, y su link del repositorio.
+print ("4 EJEMPLOS")
+entradas = ["listaNumeros= [1,2,3,4]",
+            "objetoCarro={'marca' : 'ford'}",
+            "booleano = true",
+            "cadena = 'soy una cadena de texto y nUMER02'"
+            ]
+for i in entradas:
+    prueba(i)
