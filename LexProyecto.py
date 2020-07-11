@@ -23,16 +23,21 @@ reservadas = {
     'new'            : 'NEW',
     'slice'          : 'SLICE',
     'set'            : 'SET',
-    'var'            : 'VAR'
+    'var'            : 'VAR',
+    'concat'         : 'CONCAT',
 }
 
-#indexación + and append
+tokens = [ 'MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN', 'IGUAL', 'COMA', 'COMILLA', 'PUNTO',
+           'LCORCHETE', 'RCORCHETE', 'AND', 'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE', 'CADENA', 'LISTA',
+           'PALABRA', 'BOOLEANO', 'OBJETO'] + list(reservadas.values())
 
-tokens = [ 'MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN', 'IGUAL', 'POTENCIA', 'COMA',
-'LCORCHETE', 'RCORCHETE', 'AND', 'OR', 'DIFERENTE', 'ASIGNACION' ] + list(reservadas.values())
 
 
-#Simbolos matematicos
+
+#Simbolos matematicos y Operadores logicos
+t_PUNTO=r'\.'
+t_COMILLA=r'\"'
+t_BOOLEANO=r'true|false'
 t_MENOS =r'\-'
 t_MAS =r'\+'
 t_PRODUCTO =r'\*'
@@ -50,7 +55,13 @@ t_OR = r'\|\|'
 t_DIFERENTE = r'!='
 t_ASIGNACION = r'='
 t_VAR = r'var'
-t_IF       = r'if'
+t_IF = r'if'
+t_NOT =r'\!'
+t_FLOTANTE=r'[0-9]+.{1}[0-9]+'
+t_CADENA=r'\'[\w\s\W]*\''
+t_LISTA=r'\[[\w\s\W,?]*\]'
+#t_PALABRA = r'[a-z$_][a-zA-Z0-9_]*'
+t_OBJETO= r'\{[\w\s\W,?]*:{1}[\w\s\W,?]*\}'
 t_FOR      = r'for'
 t_WHILE    = r'while'
 t_ELSE     = r'else'
@@ -59,7 +70,10 @@ t_NEW      = r'new'
 t_SET      = r'set'
 
 
-
+def t_PALABRA(t):
+    r'[a-z][a-zA-Z0-9]*'
+    t.type = reservadas.get(t.value, 'PALABRA')
+    return t
 
 def t_error(t):
     print("No se ha reconocido '%s'" % t.value[0])
@@ -79,12 +93,12 @@ def t_PROMPT(t):
     return t
 
 def t_INCLUDE(t):
-    r'[\.]include'
+    r'include'
     t.type = reservadas.get(t.value, 'INCLUDE')
     return t
 
 def t_VALUEOF(t):
-    r'[\.]valueOf'
+    r'valueOf'
     t.type = reservadas.get(t.value, 'VALUEOF')
     return t
 
@@ -114,10 +128,21 @@ def t_SLICE(t):
     return t
 
 
+def prueba(cadena):
+    analizadorS= lex.lex()
+    analizadorS.input(cadena)
 
+    while True:
+        tokenRec = analizadorS.token()
+        if tokenRec!=None:
+            print(tokenRec)
+        else:
+            break    
+    
+    
 
 print('\nTest 1\n')
-entradas = ['if', 'else', 'while', 'for'
+entradas = ['if', 'else', 'while', 'for',
             'variable.sort()',
             'variable.include(word)',
             'variable.slice(1,4)',
@@ -128,14 +153,7 @@ entradas = ['if', 'else', 'while', 'for'
             'variable.valueOf()']
 
 for i in entradas:
-    analizadorE = lex.lex()
-    analizadorE.input(i)
-    while True:
-        tokenRec = analizadorE.token()
-        if tokenRec != None:
-            print(tokenRec)
-        else:
-            break
+    prueba(i)
 
 
 
@@ -143,15 +161,7 @@ print("\n\nSlice Permitido\n")
 
 #slicePermitido
 cadenaSlice = '"hello brother".slice(3,1)\n variable.slice(1,4)'
-analizadorS= lex.lex()
-analizadorS.input(cadenaSlice)
-
-while True:
-    tokenRec = analizadorS.token()
-    if tokenRec!=None:
-        print(tokenRec)
-    else:
-        break
+prueba(cadenaSlice)
 
 
 
@@ -159,33 +169,26 @@ print("\n\nInclude Permitido\n")
 
 #includePermitido
 cadenaInclude = '"hello brother".include("word")\n variable.include("word")\n "hello world".include(word)'
-analizadorI= lex.lex()
-analizadorI.input(cadenaInclude)
-
-while True:
-    tokenRec = analizadorI.token()
-    if tokenRec!=None:
-        print(tokenRec)
-    else:
-        break
-
+prueba(cadenaInclude)
 
 
 print("\n\nPush Permitido\n")
 
 #pushPermitido
 cadenaPush = 'variable.push("word")\n world.push(word)'
-analizadorP= lex.lex()
-analizadorP.input(cadenaPush)
+prueba(cadenaPush)
 
-while True:
-    tokenRec = analizadorP.token()
-    if tokenRec!=None:
-        print(tokenRec)
-    else:
-        break
+#Operadores Matematicos y logicos
+cadenaoperdores =[ "+", '-','*','/', '**', '&&', '||', '!', '!=', '==', '===']
 
+for i in cadenaoperdores:
+    prueba(i)
 
+print('\n')
+
+prueba("55 ==55\n")
+
+prueba('10 != 1')
 
 #Definir todos los tokens para operadores y símbolos válidos.
 
@@ -194,3 +197,11 @@ while True:
 #Realizar pruebas para tokenizar sus componentes. Al menos 3 ejemplos de líneas válidas por cada integrante.
 
 #Subir a sidweb su analizador lexico.py validado, los ejemplos comprobados, y su link del repositorio.
+print ("4 EJEMPLOS")
+entradas = ["listaNumeros= [1,2,3,4]",
+            "objetoCarro={'marca' : 'ford'}",
+            "booleano = true",
+            "cadena = 'soy una cadena de texto y nUMER02'"
+            ]
+for i in entradas:
+    prueba(i)
