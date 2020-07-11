@@ -202,6 +202,7 @@ while True:
 
 
 
+
 print("\nDAMIAN CASTILLO: EJERCICIOS VARIOS\n")
 cadenaoperdores =[ '+', '-','*','/', '**', '&&', '||', '!', '!=', '=', '===']
 analizadorP4= lex.lex()
@@ -215,9 +216,7 @@ for i in cadenaoperdores:
             break
 
 
-
-
-print("\nCHRISTIAN PORTILLA: EJERCICIOS VARIOS\n")
+print("\n")
 igualdad='55===55\n'
 analizadorP6= lex.lex()
 analizadorP6.input(igualdad)
@@ -227,6 +226,8 @@ while True:
         print(tokenRec)
     else:
         break
+
+
 print("\n")
 desigualdad='10 != 1'
 analizadorP7= lex.lex()
@@ -237,7 +238,10 @@ while True:
         print(tokenRec)
     else:
         break
-print("\n")
+
+
+
+print("\nCHRISTIAN PORTILLA: EJERCICIOS VARIOS\n")
 ejercicio = ['listaNumeros= [1,2,3,4]',
             'objetoCarro={"marca" : "ford"}',
             'booleano = true',
@@ -252,6 +256,3 @@ for i in ejercicio:
             print(tokenRec)
         else:
             break
-
-
-print('\n')
