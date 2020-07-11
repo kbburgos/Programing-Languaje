@@ -80,9 +80,12 @@ def t_FLOTANTE(t):
     return t
 
 
-def t_BOOLEAN(t):
-    r'(True|False)'
-    t.value = True if t.value == 'True' else False
+def t_BOOLEANO(t):
+    r'true|false'
+    if t.value == 'True': 
+        t.value = True 
+    else: 
+        False
     return t
 
 def t_PALABRA(t):
@@ -208,7 +211,7 @@ prueba('10 != 1') #FLOTANTO NO RECONOCE
 print ("4 EJEMPLOS")
 entradas = ['listaNumeros= [1,2,3,4]',
             'objetoCarro={"marca" : "ford"}',
-            'booleano = true', #TRUE NO RECONOCE
+            'booleano = true', 
             'cadena = "soy una cadena de texto y nUMER02"'
             ]
 for i in entradas:
