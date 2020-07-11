@@ -5,13 +5,13 @@
 #Analizador lexico JavaScript
 
 import ply.lex as lex
+
 #Definir todos los tokens para palabras reservadas.
 reservadas = {
     'if'             : 'IF',
     'else'           : 'ELSE',
     'while'          : 'WHILE',
     'for'            : 'FOR',
-    'echo'           : 'ECHO',
     'console'        : 'CONSOLE',
     'prompt'         : 'PROMPT',
     'include'        : 'INCLUDE',
@@ -22,14 +22,15 @@ reservadas = {
     'copyWithing'    : 'COPYWHITIN',
     'new'            : 'NEW',
     'slice'          : 'SLICE',
-    'set'            : 'SET'
+    'set'            : 'SET',
+    'var'            : 'VAR'
 }
 
+#indexación + and append
 
-tokens = ["MENOS","MAS", "PRODUCTO",
-"DIVISION", "NUMERO", "LPAREN","RPAREN", "IGUAL", "POTENCIA",
+tokens = [ 'MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN', 'IGUAL', 'POTENCIA', 'COMA',
+'LCORCHETE', 'RCORCHETE', 'AND', 'OR', 'DIFERENTE', 'ASIGNACION' ] + list(reservadas.values())
 
-] + list(reservadas.values())
 
 #Simbolos matematicos
 t_MENOS =r'\-'
@@ -39,84 +40,79 @@ t_DIVISION =r'/'
 t_NUMERO=r'[0-9]+'
 t_LPAREN=r'\('
 t_RPAREN=r'\)'
-t_IGUAL =r'='
+t_IGUAL =r'==='
 t_POTENCIA =r'\*\*'
-
-
+t_LCORCHETE = r'\['
+t_RCORCHETE = r'\]'
+t_COMA = r'\,'
+t_AND = r'&&'
+t_OR = r'\|\|'
+t_DIFERENTE = r'!='
+t_ASIGNACION = r'='
+t_VAR = r'var'
 t_IF       = r'if'
 t_FOR      = r'for'
 t_WHILE    = r'while'
 t_ELSE     = r'else'
 t_ignore   = ' \t'
-t_ECHO     = r'echo'
 t_NEW      = r'new'
 t_SET      = r'set'
+
+
+
 
 def t_error(t):
     print("No se ha reconocido '%s'" % t.value[0])
     t.lexer.skip(1)
 
-
 def t_NEWLINE(t):
     r'\n+'
 
-
 def t_CONSOLE(t):
-    r'console.log\([\[\(]?("?.*?"?)+[\]\)]?\)'
+    r'console.log'
     t.type = reservadas.get(t.value, 'CONSOLE')
     return t
 
-
 def t_PROMPT(t):
-    r'prompt\([\[\(]?("?.*?"?)+[\]\)]?\)'
+    r'prompt'
     t.type = reservadas.get(t.value, 'PROMPT')
     return t
 
-
 def t_INCLUDE(t):
-    r'(((")[\w\s?]+")|[\w]+)[\.]include\((("[aA-zZ 0-9]+")|[aA-zZ 0-9]+)\)|(;$)'
+    r'[\.]include'
     t.type = reservadas.get(t.value, 'INCLUDE')
     return t
 
-
 def t_VALUEOF(t):
-    r'(((")[\w\s?]+")|[\w]+)[\.]valueOf\(\)|(;$)'
+    r'[\.]valueOf'
     t.type = reservadas.get(t.value, 'VALUEOF')
     return t
 
-
 def t_CHARTAT(t):
-    r'(((")[\w\s?]+")|[\w]+)[\.]chartAt\(([0-9]+)\)|(;$)'
+    r'[\.]chartAt'
     t.type = reservadas.get(t.value, 'CHARTAT')
     return t
 
-
-
 def t_PUSH(t):
-    r'[\w]+[\.]push\((("[aA-zZ 0-9]+")|([aA-zZ 0-9]+))\)|(;$)'
+    r'[\.]push'
     t.type = reservadas.get(t.value, 'PUSH')
     return t
 
-
-
 def t_SORT(t):
-    r'[\w]+[\.]sort\(\)|(;$)'
+    r'[\.]sort'
     t.type = reservadas.get(t.value, 'SORT')
     return t
 
-
-
 def t_COPYWITHING(t):
-    r'[\w]+[\.]copyWithing\((([\d]+,\s?[\d]+)|([\d]+,\s?[\d]+,\s?[\d]+))\)|(;$)'
+    r'[\.]copyWithing'
     t.type = reservadas.get(t.value, 'COPYWITHING')
     return t
 
-
-
 def t_SLICE(t):
-    r'(((")[\w\s?]+")|[\w]+)[\.]slice\(([\d]+,\s?[\d]+)\)|(;$)'
+    r'[\.]slice'
     t.type = reservadas.get(t.value, 'SLICE')
     return t
+
 
 
 
