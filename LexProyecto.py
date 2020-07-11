@@ -23,13 +23,12 @@ reservadas = {
     'new'            : 'NEW',
     'slice'          : 'SLICE',
     'set'            : 'SET',
-    'var'            : 'VAR',
     'concat'         : 'CONCAT',
 }
 
 tokens = [ 'MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN', 'IGUAL', 'COMA', 'COMILLA', 'PUNTO',
-           'LCORCHETE', 'RCORCHETE', 'AND', 'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE', 'CADENA', 'LISTA',
-           'PALABRA', 'BOOLEANO', 'OBJETO'] + list(reservadas.values())
+           'LCORCHETE', 'RCORCHETE', 'AND', 'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE',
+           'LISTA', 'STRING', 'BOOLEANO', 'OBJETO', 'PALABRA'] + list(reservadas.values())
 
 
 
@@ -37,7 +36,6 @@ tokens = [ 'MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN',
 #Simbolos matematicos y Operadores logicos
 t_PUNTO=r'\.'
 t_COMILLA=r'\"'
-t_BOOLEANO=r'true|false'
 t_MENOS =r'\-'
 t_MAS =r'\+'
 t_PRODUCTO =r'\*'
@@ -54,12 +52,12 @@ t_AND = r'&&'
 t_OR = r'\|\|'
 t_DIFERENTE = r'!='
 t_ASIGNACION = r'='
-t_VAR = r'var'
+#t_PALABRA= r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_IF = r'if'
 t_NOT =r'\!'
-t_FLOTANTE=r'[0-9]+.{1}[0-9]+'
-t_CADENA=r'\'[\w\s\W]*\''
-t_LISTA=r'\[[\w\s\W,?]*\]'
+#t_FLOTANTE=r'[0-9]+.{1}[0-9]+'
+#t_CADENA=r'\'[\w\s\W]*\''
+#t_LISTA=r'\[[\w\s\W,?]*\]'
 #t_PALABRA = r'[a-z$_][a-zA-Z0-9_]*'
 t_OBJETO= r'\{[\w\s\W,?]*:{1}[\w\s\W,?]*\}'
 t_FOR      = r'for'
@@ -68,10 +66,27 @@ t_ELSE     = r'else'
 t_ignore   = ' \t'
 t_NEW      = r'new'
 t_SET      = r'set'
+t_STRING = r'".*?"'
 
+
+def t_LISTA(t):
+    r'(\[)((\[)?(([+-]?[0-9]+|\,)+|(("?\w*?"?)+|\,)+|([+-]?[0-9]+((\.[0-9]+))?|\,)+)(\]?))+(\,?)(\])'
+    return t
+
+
+def t_FLOTANTE(t):
+    r'[-+]?[0-9]+((\.[0-9]+))?$'
+    t.value = float(t.value)
+    return t
+
+
+def t_BOOLEAN(t):
+    r'(True|False)'
+    t.value = True if t.value == 'True' else False
+    return t
 
 def t_PALABRA(t):
-    r'[a-z][a-zA-Z0-9]*'
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.type = reservadas.get(t.value, 'PALABRA')
     return t
 
@@ -179,29 +194,22 @@ cadenaPush = 'variable.push("word")\n world.push(word)'
 prueba(cadenaPush)
 
 #Operadores Matematicos y logicos
-cadenaoperdores =[ "+", '-','*','/', '**', '&&', '||', '!', '!=', '==', '===']
+cadenaoperdores =[ '+', '-','*','/', '**', '&&', '||', '!', '!=', '=', '===']
 
 for i in cadenaoperdores:
     prueba(i)
 
 print('\n')
 
-prueba("55 ==55\n")
+prueba('55===55\n')
 
-prueba('10 != 1')
+prueba('10 != 1') #FLOTANTO NO RECONOCE
 
-#Definir todos los tokens para operadores y símbolos válidos.
-
-#Definir tipo de datos y cómo se pueden escribir variables en su LP.
-
-#Realizar pruebas para tokenizar sus componentes. Al menos 3 ejemplos de líneas válidas por cada integrante.
-
-#Subir a sidweb su analizador lexico.py validado, los ejemplos comprobados, y su link del repositorio.
 print ("4 EJEMPLOS")
-entradas = ["listaNumeros= [1,2,3,4]",
-            "objetoCarro={'marca' : 'ford'}",
-            "booleano = true",
-            "cadena = 'soy una cadena de texto y nUMER02'"
+entradas = ['listaNumeros= [1,2,3,4]',
+            'objetoCarro={"marca" : "ford"}',
+            'booleano = true', #TRUE NO RECONOCE
+            'cadena = "soy una cadena de texto y nUMER02"'
             ]
 for i in entradas:
     prueba(i)
