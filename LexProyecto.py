@@ -161,9 +161,16 @@ def prueba(cadena):
         else:
             break    
     
-    
-#PRUEBAS-BURGOS
-print('\nPRUEBAS\n')
+
+
+print("#################################################################################################################\n")
+print("#####################################          CAPOBU          ##################################################")
+print("\nAnalizador Léxico JavaScript\nIntegrantes:\nKarla Burgos\nDamian Castillo\nChristian Portilla")
+print("\n#################################################################################################################\n")
+
+
+
+print("KARLA BURGOS: EJERCICIOS VARIOS\n")
 entradas = ['if', 'else', 'while', 'for',
             'a.sort()',
             'b.include(word)',
@@ -172,52 +179,94 @@ entradas = ['if', 'else', 'while', 'for',
             '"palabra".chartAt(3)',
             'console.log(word)',
             'prompt(word)',
-            'variable= [1,2,3,4]'
-            'variable.valueOf()',
-            '34.6',
-            '4']
+            'arreglo.concat(arreglo)']
 
+analizadorP1= lex.lex()
 for i in entradas:
-    prueba(i)
+    analizadorP1.input(i)
+    while True:
+        tokenRec = analizadorP1.token()
+        if tokenRec!=None:
+            print(tokenRec)
+        else:
+            break
 
 
-
-print("\n\nSlice Permitido\n")
+print("\n")
 cadenaSlice = '"hello brother".slice(3,1)\n variable.slice(1,4)'
-prueba(cadenaSlice)
+analizadorP2= lex.lex()
+analizadorP2.input(cadenaSlice)
+while True:
+    tokenRec = analizadorP2.token()
+    if tokenRec != None:
+        print(tokenRec)
+    else:
+        break
 
 
-print("\n\nInclude Permitido\n")
+print("\n")
 cadenaInclude = '"hello brother".include("word")\n variable.include("word")\n "hello world".include(word)'
-prueba(cadenaInclude)
-
-
-print("\n\nPush Permitido\n")
-cadenaPush = 'variable.push("word")\n world.push(word)'
-prueba(cadenaPush)
-
-
-
-
+analizadorP3= lex.lex()
+analizadorP3.input(cadenaInclude)
+while True:
+    tokenRec = analizadorP3.token()
+    if tokenRec != None:
+        print(tokenRec)
+    else:
+        break
 
 
 
-#Operadores Matematicos y logicos
+print("\nDAMIAN CASTILLO: EJERCICIOS VARIOS\n")
 cadenaoperdores =[ '+', '-','*','/', '**', '&&', '||', '!', '!=', '=', '===']
+analizadorP4= lex.lex()
 for i in cadenaoperdores:
-    prueba(i)
+    analizadorP4.input(i)
+    while True:
+        tokenRec = analizadorP4.token()
+        if tokenRec!=None:
+            print(tokenRec)
+        else:
+            break
 
 
-print('\n\nIGUALDAD y DESIGUALDAD\n')
-prueba('55===55\n')
-prueba('10 != 1')
-
-
-print ("\n\nEJEMPLOS VARIOS")
-entradas = ['listaNumeros= [1,2,3,4]',
+print("\nCHRISTIAN PORTILLA: EJERCICIOS VARIOS\n")
+igualdad='55===55\n'
+analizadorP6= lex.lex()
+analizadorP6.input(igualdad)
+while True:
+    tokenRec = analizadorP6.token()
+    if tokenRec != None:
+        print(tokenRec)
+    else:
+        break
+print("\n")
+desigualdad='10 != 1'
+analizadorP7= lex.lex()
+analizadorP7.input(desigualdad)
+while True:
+    tokenRec = analizadorP7.token()
+    if tokenRec != None:
+        print(tokenRec)
+    else:
+        break
+print("\n")
+ejercicio = ['listaNumeros= [1,2,3,4]',
             'objetoCarro={"marca" : "ford"}',
-            'booleano = True',
+            'booleano = true',
             'cadena = "soy una cadena de texto y nUMER02"'
             ]
-for i in entradas:
-    prueba(i)
+analizadorP5= lex.lex()
+for i in ejercicio:
+    analizadorP5.input(i)
+    while True:
+        tokenRec = analizadorP5.token()
+        if tokenRec!=None:
+            print(tokenRec)
+        else:
+            break
+
+
+
+
+
