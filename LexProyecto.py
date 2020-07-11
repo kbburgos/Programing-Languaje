@@ -40,7 +40,7 @@ t_MENOS =r'\-'
 t_MAS =r'\+'
 t_PRODUCTO =r'\*'
 t_DIVISION =r'/'
-t_NUMERO=r'[0-9]+'
+t_NUMERO=r'[-+]?[0-9]+'
 t_LPAREN=r'\('
 t_RPAREN=r'\)'
 t_IGUAL =r'==='
@@ -75,15 +75,16 @@ def t_LISTA(t):
 
 
 def t_FLOTANTE(t):
-    r'[-+]?[0-9]+((\.[0-9]+))?$'
+    r'[-+]?[0-9]+(\.)[0-9]+$'
     t.value = float(t.value)
     return t
 
 
-def t_BOOLEAN(t):
+def t_BOOLEANO(t):
     r'(True|False)'
     t.value = True if t.value == 'True' else False
     return t
+
 
 def t_PALABRA(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -165,7 +166,9 @@ entradas = ['if', 'else', 'while', 'for',
             'variable.chartAt(3)',
             'console.log(word)',
             'prompt(word)',
-            'variable.valueOf()']
+            'variable.valueOf()',
+            '34.6',
+            '4']
 
 for i in entradas:
     prueba(i)
@@ -203,12 +206,12 @@ print('\n')
 
 prueba('55===55\n')
 
-prueba('10 != 1') #FLOTANTO NO RECONOCE
+prueba('10 != 1')
 
 print ("4 EJEMPLOS")
 entradas = ['listaNumeros= [1,2,3,4]',
             'objetoCarro={"marca" : "ford"}',
-            'booleano = true', #TRUE NO RECONOCE
+            'booleano = True', #TRUE NO RECONOCE
             'cadena = "soy una cadena de texto y nUMER02"'
             ]
 for i in entradas:
