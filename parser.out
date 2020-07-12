@@ -1,0 +1,674 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    ASIGNACION
+    BOOLEANO
+    CHARTAT
+    COMA
+    COMILLA
+    CONCAT
+    CONSOLE
+    COPYWHITIN
+    DIFERENTE
+    FLOTANTE
+    FOR
+    INCLUDE
+    LCORCHETE
+    LISTA
+    NEW
+    NOT
+    OBJETO
+    OR
+    PUNTO
+    PUSH
+    RCORCHETE
+    SET
+    SLICE
+    SORT
+    VALUEOF
+    WHILE
+
+Grammar
+
+Rule 0     S' -> sentencias
+Rule 1     sentencias -> asignacion
+Rule 2     sentencias -> expresion
+Rule 3     sentencias -> metodos
+Rule 4     sentencias -> if
+Rule 5     metodos -> imprimir
+Rule 6     imprimir -> PROMPT factor
+Rule 7     if -> IF LPAREN condicion RPAREN LLLAVES sentencias RLLAVES
+Rule 8     else -> ELSE LLLAVES sentencias RLLAVES
+Rule 9     asignacion -> PALABRA IGUAL expresion
+Rule 10    expresion -> term MAS factor
+Rule 11    expresion -> term MENOS factor
+Rule 12    expresion -> term
+Rule 13    expresion -> expresion PRODUCTO term
+Rule 14    expresion -> expresion DIVISION term
+Rule 15    expresion -> expresion POTENCIA term
+Rule 16    condicion -> factor IGUAL factor
+Rule 17    term -> factor
+Rule 18    factor -> NUMERO
+Rule 19    factor -> STRING
+Rule 20    factor -> PALABRA
+Rule 21    factor -> LPAREN expresion RPAREN
+
+Terminals, with rules where they appear
+
+AND                  : 
+ASIGNACION           : 
+BOOLEANO             : 
+CHARTAT              : 
+COMA                 : 
+COMILLA              : 
+CONCAT               : 
+CONSOLE              : 
+COPYWHITIN           : 
+DIFERENTE            : 
+DIVISION             : 14
+ELSE                 : 8
+FLOTANTE             : 
+FOR                  : 
+IF                   : 7
+IGUAL                : 9 16
+INCLUDE              : 
+LCORCHETE            : 
+LISTA                : 
+LLLAVES              : 7 8
+LPAREN               : 7 21
+MAS                  : 10
+MENOS                : 11
+NEW                  : 
+NOT                  : 
+NUMERO               : 18
+OBJETO               : 
+OR                   : 
+PALABRA              : 9 20
+POTENCIA             : 15
+PRODUCTO             : 13
+PROMPT               : 6
+PUNTO                : 
+PUSH                 : 
+RCORCHETE            : 
+RLLAVES              : 7 8
+RPAREN               : 7 21
+SET                  : 
+SLICE                : 
+SORT                 : 
+STRING               : 19
+VALUEOF              : 
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+asignacion           : 1
+condicion            : 7
+else                 : 
+expresion            : 2 9 13 14 15 21
+factor               : 6 10 11 16 16 17
+if                   : 4
+imprimir             : 5
+metodos              : 3
+sentencias           : 7 8 0
+term                 : 10 11 12 13 14 15
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . sentencias
+    (1) sentencias -> . asignacion
+    (2) sentencias -> . expresion
+    (3) sentencias -> . metodos
+    (4) sentencias -> . if
+    (9) asignacion -> . PALABRA IGUAL expresion
+    (10) expresion -> . term MAS factor
+    (11) expresion -> . term MENOS factor
+    (12) expresion -> . term
+    (13) expresion -> . expresion PRODUCTO term
+    (14) expresion -> . expresion DIVISION term
+    (15) expresion -> . expresion POTENCIA term
+    (5) metodos -> . imprimir
+    (7) if -> . IF LPAREN condicion RPAREN LLLAVES sentencias RLLAVES
+    (17) term -> . factor
+    (6) imprimir -> . PROMPT factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    PALABRA         shift and go to state 6
+    IF              shift and go to state 10
+    PROMPT          shift and go to state 12
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    LPAREN          shift and go to state 11
+
+    sentencias                     shift and go to state 1
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodos                        shift and go to state 4
+    if                             shift and go to state 5
+    term                           shift and go to state 7
+    factor                         shift and go to state 8
+    imprimir                       shift and go to state 9
+
+state 1
+
+    (0) S' -> sentencias .
+
+
+
+state 2
+
+    (1) sentencias -> asignacion .
+
+    $end            reduce using rule 1 (sentencias -> asignacion .)
+    RLLAVES         reduce using rule 1 (sentencias -> asignacion .)
+
+
+state 3
+
+    (2) sentencias -> expresion .
+    (13) expresion -> expresion . PRODUCTO term
+    (14) expresion -> expresion . DIVISION term
+    (15) expresion -> expresion . POTENCIA term
+
+    $end            reduce using rule 2 (sentencias -> expresion .)
+    RLLAVES         reduce using rule 2 (sentencias -> expresion .)
+    PRODUCTO        shift and go to state 15
+    DIVISION        shift and go to state 16
+    POTENCIA        shift and go to state 17
+
+
+state 4
+
+    (3) sentencias -> metodos .
+
+    $end            reduce using rule 3 (sentencias -> metodos .)
+    RLLAVES         reduce using rule 3 (sentencias -> metodos .)
+
+
+state 5
+
+    (4) sentencias -> if .
+
+    $end            reduce using rule 4 (sentencias -> if .)
+    RLLAVES         reduce using rule 4 (sentencias -> if .)
+
+
+state 6
+
+    (9) asignacion -> PALABRA . IGUAL expresion
+    (20) factor -> PALABRA .
+
+    IGUAL           shift and go to state 18
+    MAS             reduce using rule 20 (factor -> PALABRA .)
+    MENOS           reduce using rule 20 (factor -> PALABRA .)
+    PRODUCTO        reduce using rule 20 (factor -> PALABRA .)
+    DIVISION        reduce using rule 20 (factor -> PALABRA .)
+    POTENCIA        reduce using rule 20 (factor -> PALABRA .)
+    $end            reduce using rule 20 (factor -> PALABRA .)
+    RLLAVES         reduce using rule 20 (factor -> PALABRA .)
+
+
+state 7
+
+    (10) expresion -> term . MAS factor
+    (11) expresion -> term . MENOS factor
+    (12) expresion -> term .
+
+    MAS             shift and go to state 19
+    MENOS           shift and go to state 20
+    PRODUCTO        reduce using rule 12 (expresion -> term .)
+    DIVISION        reduce using rule 12 (expresion -> term .)
+    POTENCIA        reduce using rule 12 (expresion -> term .)
+    $end            reduce using rule 12 (expresion -> term .)
+    RPAREN          reduce using rule 12 (expresion -> term .)
+    RLLAVES         reduce using rule 12 (expresion -> term .)
+
+
+state 8
+
+    (17) term -> factor .
+
+    MAS             reduce using rule 17 (term -> factor .)
+    MENOS           reduce using rule 17 (term -> factor .)
+    PRODUCTO        reduce using rule 17 (term -> factor .)
+    DIVISION        reduce using rule 17 (term -> factor .)
+    POTENCIA        reduce using rule 17 (term -> factor .)
+    $end            reduce using rule 17 (term -> factor .)
+    RPAREN          reduce using rule 17 (term -> factor .)
+    RLLAVES         reduce using rule 17 (term -> factor .)
+
+
+state 9
+
+    (5) metodos -> imprimir .
+
+    $end            reduce using rule 5 (metodos -> imprimir .)
+    RLLAVES         reduce using rule 5 (metodos -> imprimir .)
+
+
+state 10
+
+    (7) if -> IF . LPAREN condicion RPAREN LLLAVES sentencias RLLAVES
+
+    LPAREN          shift and go to state 21
+
+
+state 11
+
+    (21) factor -> LPAREN . expresion RPAREN
+    (10) expresion -> . term MAS factor
+    (11) expresion -> . term MENOS factor
+    (12) expresion -> . term
+    (13) expresion -> . expresion PRODUCTO term
+    (14) expresion -> . expresion DIVISION term
+    (15) expresion -> . expresion POTENCIA term
+    (17) term -> . factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    PALABRA         shift and go to state 23
+    LPAREN          shift and go to state 11
+
+    expresion                      shift and go to state 22
+    term                           shift and go to state 7
+    factor                         shift and go to state 8
+
+state 12
+
+    (6) imprimir -> PROMPT . factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    PALABRA         shift and go to state 23
+    LPAREN          shift and go to state 11
+
+    factor                         shift and go to state 24
+
+state 13
+
+    (18) factor -> NUMERO .
+
+    MAS             reduce using rule 18 (factor -> NUMERO .)
+    MENOS           reduce using rule 18 (factor -> NUMERO .)
+    PRODUCTO        reduce using rule 18 (factor -> NUMERO .)
+    DIVISION        reduce using rule 18 (factor -> NUMERO .)
+    POTENCIA        reduce using rule 18 (factor -> NUMERO .)
+    $end            reduce using rule 18 (factor -> NUMERO .)
+    RPAREN          reduce using rule 18 (factor -> NUMERO .)
+    RLLAVES         reduce using rule 18 (factor -> NUMERO .)
+    IGUAL           reduce using rule 18 (factor -> NUMERO .)
+
+
+state 14
+
+    (19) factor -> STRING .
+
+    MAS             reduce using rule 19 (factor -> STRING .)
+    MENOS           reduce using rule 19 (factor -> STRING .)
+    PRODUCTO        reduce using rule 19 (factor -> STRING .)
+    DIVISION        reduce using rule 19 (factor -> STRING .)
+    POTENCIA        reduce using rule 19 (factor -> STRING .)
+    $end            reduce using rule 19 (factor -> STRING .)
+    RPAREN          reduce using rule 19 (factor -> STRING .)
+    RLLAVES         reduce using rule 19 (factor -> STRING .)
+    IGUAL           reduce using rule 19 (factor -> STRING .)
+
+
+state 15
+
+    (13) expresion -> expresion PRODUCTO . term
+    (17) term -> . factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    PALABRA         shift and go to state 23
+    LPAREN          shift and go to state 11
+
+    term                           shift and go to state 25
+    factor                         shift and go to state 8
+
+state 16
+
+    (14) expresion -> expresion DIVISION . term
+    (17) term -> . factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    PALABRA         shift and go to state 23
+    LPAREN          shift and go to state 11
+
+    term                           shift and go to state 26
+    factor                         shift and go to state 8
+
+state 17
+
+    (15) expresion -> expresion POTENCIA . term
+    (17) term -> . factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    PALABRA         shift and go to state 23
+    LPAREN          shift and go to state 11
+
+    term                           shift and go to state 27
+    factor                         shift and go to state 8
+
+state 18
+
+    (9) asignacion -> PALABRA IGUAL . expresion
+    (10) expresion -> . term MAS factor
+    (11) expresion -> . term MENOS factor
+    (12) expresion -> . term
+    (13) expresion -> . expresion PRODUCTO term
+    (14) expresion -> . expresion DIVISION term
+    (15) expresion -> . expresion POTENCIA term
+    (17) term -> . factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    PALABRA         shift and go to state 23
+    LPAREN          shift and go to state 11
+
+    expresion                      shift and go to state 28
+    term                           shift and go to state 7
+    factor                         shift and go to state 8
+
+state 19
+
+    (10) expresion -> term MAS . factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    PALABRA         shift and go to state 23
+    LPAREN          shift and go to state 11
+
+    factor                         shift and go to state 29
+
+state 20
+
+    (11) expresion -> term MENOS . factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    PALABRA         shift and go to state 23
+    LPAREN          shift and go to state 11
+
+    factor                         shift and go to state 30
+
+state 21
+
+    (7) if -> IF LPAREN . condicion RPAREN LLLAVES sentencias RLLAVES
+    (16) condicion -> . factor IGUAL factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    PALABRA         shift and go to state 23
+    LPAREN          shift and go to state 11
+
+    condicion                      shift and go to state 31
+    factor                         shift and go to state 32
+
+state 22
+
+    (21) factor -> LPAREN expresion . RPAREN
+    (13) expresion -> expresion . PRODUCTO term
+    (14) expresion -> expresion . DIVISION term
+    (15) expresion -> expresion . POTENCIA term
+
+    RPAREN          shift and go to state 33
+    PRODUCTO        shift and go to state 15
+    DIVISION        shift and go to state 16
+    POTENCIA        shift and go to state 17
+
+
+state 23
+
+    (20) factor -> PALABRA .
+
+    MAS             reduce using rule 20 (factor -> PALABRA .)
+    MENOS           reduce using rule 20 (factor -> PALABRA .)
+    RPAREN          reduce using rule 20 (factor -> PALABRA .)
+    PRODUCTO        reduce using rule 20 (factor -> PALABRA .)
+    DIVISION        reduce using rule 20 (factor -> PALABRA .)
+    POTENCIA        reduce using rule 20 (factor -> PALABRA .)
+    $end            reduce using rule 20 (factor -> PALABRA .)
+    RLLAVES         reduce using rule 20 (factor -> PALABRA .)
+    IGUAL           reduce using rule 20 (factor -> PALABRA .)
+
+
+state 24
+
+    (6) imprimir -> PROMPT factor .
+
+    $end            reduce using rule 6 (imprimir -> PROMPT factor .)
+    RLLAVES         reduce using rule 6 (imprimir -> PROMPT factor .)
+
+
+state 25
+
+    (13) expresion -> expresion PRODUCTO term .
+
+    PRODUCTO        reduce using rule 13 (expresion -> expresion PRODUCTO term .)
+    DIVISION        reduce using rule 13 (expresion -> expresion PRODUCTO term .)
+    POTENCIA        reduce using rule 13 (expresion -> expresion PRODUCTO term .)
+    $end            reduce using rule 13 (expresion -> expresion PRODUCTO term .)
+    RPAREN          reduce using rule 13 (expresion -> expresion PRODUCTO term .)
+    RLLAVES         reduce using rule 13 (expresion -> expresion PRODUCTO term .)
+
+
+state 26
+
+    (14) expresion -> expresion DIVISION term .
+
+    PRODUCTO        reduce using rule 14 (expresion -> expresion DIVISION term .)
+    DIVISION        reduce using rule 14 (expresion -> expresion DIVISION term .)
+    POTENCIA        reduce using rule 14 (expresion -> expresion DIVISION term .)
+    $end            reduce using rule 14 (expresion -> expresion DIVISION term .)
+    RPAREN          reduce using rule 14 (expresion -> expresion DIVISION term .)
+    RLLAVES         reduce using rule 14 (expresion -> expresion DIVISION term .)
+
+
+state 27
+
+    (15) expresion -> expresion POTENCIA term .
+
+    PRODUCTO        reduce using rule 15 (expresion -> expresion POTENCIA term .)
+    DIVISION        reduce using rule 15 (expresion -> expresion POTENCIA term .)
+    POTENCIA        reduce using rule 15 (expresion -> expresion POTENCIA term .)
+    $end            reduce using rule 15 (expresion -> expresion POTENCIA term .)
+    RPAREN          reduce using rule 15 (expresion -> expresion POTENCIA term .)
+    RLLAVES         reduce using rule 15 (expresion -> expresion POTENCIA term .)
+
+
+state 28
+
+    (9) asignacion -> PALABRA IGUAL expresion .
+    (13) expresion -> expresion . PRODUCTO term
+    (14) expresion -> expresion . DIVISION term
+    (15) expresion -> expresion . POTENCIA term
+
+    $end            reduce using rule 9 (asignacion -> PALABRA IGUAL expresion .)
+    RLLAVES         reduce using rule 9 (asignacion -> PALABRA IGUAL expresion .)
+    PRODUCTO        shift and go to state 15
+    DIVISION        shift and go to state 16
+    POTENCIA        shift and go to state 17
+
+
+state 29
+
+    (10) expresion -> term MAS factor .
+
+    PRODUCTO        reduce using rule 10 (expresion -> term MAS factor .)
+    DIVISION        reduce using rule 10 (expresion -> term MAS factor .)
+    POTENCIA        reduce using rule 10 (expresion -> term MAS factor .)
+    $end            reduce using rule 10 (expresion -> term MAS factor .)
+    RPAREN          reduce using rule 10 (expresion -> term MAS factor .)
+    RLLAVES         reduce using rule 10 (expresion -> term MAS factor .)
+
+
+state 30
+
+    (11) expresion -> term MENOS factor .
+
+    PRODUCTO        reduce using rule 11 (expresion -> term MENOS factor .)
+    DIVISION        reduce using rule 11 (expresion -> term MENOS factor .)
+    POTENCIA        reduce using rule 11 (expresion -> term MENOS factor .)
+    $end            reduce using rule 11 (expresion -> term MENOS factor .)
+    RPAREN          reduce using rule 11 (expresion -> term MENOS factor .)
+    RLLAVES         reduce using rule 11 (expresion -> term MENOS factor .)
+
+
+state 31
+
+    (7) if -> IF LPAREN condicion . RPAREN LLLAVES sentencias RLLAVES
+
+    RPAREN          shift and go to state 34
+
+
+state 32
+
+    (16) condicion -> factor . IGUAL factor
+
+    IGUAL           shift and go to state 35
+
+
+state 33
+
+    (21) factor -> LPAREN expresion RPAREN .
+
+    MAS             reduce using rule 21 (factor -> LPAREN expresion RPAREN .)
+    MENOS           reduce using rule 21 (factor -> LPAREN expresion RPAREN .)
+    PRODUCTO        reduce using rule 21 (factor -> LPAREN expresion RPAREN .)
+    DIVISION        reduce using rule 21 (factor -> LPAREN expresion RPAREN .)
+    POTENCIA        reduce using rule 21 (factor -> LPAREN expresion RPAREN .)
+    $end            reduce using rule 21 (factor -> LPAREN expresion RPAREN .)
+    RPAREN          reduce using rule 21 (factor -> LPAREN expresion RPAREN .)
+    RLLAVES         reduce using rule 21 (factor -> LPAREN expresion RPAREN .)
+    IGUAL           reduce using rule 21 (factor -> LPAREN expresion RPAREN .)
+
+
+state 34
+
+    (7) if -> IF LPAREN condicion RPAREN . LLLAVES sentencias RLLAVES
+
+    LLLAVES         shift and go to state 36
+
+
+state 35
+
+    (16) condicion -> factor IGUAL . factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    PALABRA         shift and go to state 23
+    LPAREN          shift and go to state 11
+
+    factor                         shift and go to state 37
+
+state 36
+
+    (7) if -> IF LPAREN condicion RPAREN LLLAVES . sentencias RLLAVES
+    (1) sentencias -> . asignacion
+    (2) sentencias -> . expresion
+    (3) sentencias -> . metodos
+    (4) sentencias -> . if
+    (9) asignacion -> . PALABRA IGUAL expresion
+    (10) expresion -> . term MAS factor
+    (11) expresion -> . term MENOS factor
+    (12) expresion -> . term
+    (13) expresion -> . expresion PRODUCTO term
+    (14) expresion -> . expresion DIVISION term
+    (15) expresion -> . expresion POTENCIA term
+    (5) metodos -> . imprimir
+    (7) if -> . IF LPAREN condicion RPAREN LLLAVES sentencias RLLAVES
+    (17) term -> . factor
+    (6) imprimir -> . PROMPT factor
+    (18) factor -> . NUMERO
+    (19) factor -> . STRING
+    (20) factor -> . PALABRA
+    (21) factor -> . LPAREN expresion RPAREN
+
+    PALABRA         shift and go to state 6
+    IF              shift and go to state 10
+    PROMPT          shift and go to state 12
+    NUMERO          shift and go to state 13
+    STRING          shift and go to state 14
+    LPAREN          shift and go to state 11
+
+    sentencias                     shift and go to state 38
+    asignacion                     shift and go to state 2
+    expresion                      shift and go to state 3
+    metodos                        shift and go to state 4
+    if                             shift and go to state 5
+    term                           shift and go to state 7
+    factor                         shift and go to state 8
+    imprimir                       shift and go to state 9
+
+state 37
+
+    (16) condicion -> factor IGUAL factor .
+
+    RPAREN          reduce using rule 16 (condicion -> factor IGUAL factor .)
+
+
+state 38
+
+    (7) if -> IF LPAREN condicion RPAREN LLLAVES sentencias . RLLAVES
+
+    RLLAVES         shift and go to state 39
+
+
+state 39
+
+    (7) if -> IF LPAREN condicion RPAREN LLLAVES sentencias RLLAVES .
+
+    $end            reduce using rule 7 (if -> IF LPAREN condicion RPAREN LLLAVES sentencias RLLAVES .)
+    RLLAVES         reduce using rule 7 (if -> IF LPAREN condicion RPAREN LLLAVES sentencias RLLAVES .)
+
