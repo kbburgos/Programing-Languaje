@@ -28,7 +28,7 @@ reservadas = {
 
 tokens = [ 'MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN', 'IGUAL', 'COMA', 'COMILLA', 'PUNTO',
            'LCORCHETE', 'RCORCHETE', 'AND', 'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE',
-           'LISTA', 'STRING', 'BOOLEANO', 'OBJETO', 'PALABRA'] + list(reservadas.values())
+           'LISTA', 'STRING', 'BOOLEANO', 'OBJETO', 'PALABRA', 'LLLAVES', 'RLLAVES'] + list(reservadas.values())
 
 
 
@@ -40,13 +40,15 @@ t_MENOS =r'\-'
 t_MAS =r'\+'
 t_PRODUCTO =r'\*'
 t_DIVISION =r'/'
-t_NUMERO=r'[0-9]+'
+#t_NUMERO=r'[0-9]+'
 t_LPAREN=r'\('
 t_RPAREN=r'\)'
 t_IGUAL =r'==='
 t_POTENCIA =r'\*\*'
 t_LCORCHETE = r'\['
 t_RCORCHETE = r'\]'
+t_LLLAVES = r'\{'
+t_RLLAVES = r'\}'
 t_COMA = r'\,'
 t_AND = r'&&'
 t_OR = r'\|\|'
@@ -68,6 +70,10 @@ t_NEW      = r'new'
 t_SET      = r'set'
 t_STRING = r'".*?"'
 
+def t_NUMERO(t):
+    r'[0-9]+'
+    t.value = int(t.value)
+    return t
 
 def t_LISTA(t):
     r'(\[)((\[)?(([+-]?[0-9]+|\,)+|(("?\w*?"?)+|\,)+|([+-]?[0-9]+((\.[0-9]+))?|\,)+)(\]?))+(\,?)(\])'
@@ -75,7 +81,7 @@ def t_LISTA(t):
 
 
 def t_FLOTANTE(t):
-    r'[-+]?[0-9]+((\.[0-9]+))?$'
+    r'[-+]?[0-9]+(\.[0-9]+)$'
     t.value = float(t.value)
     return t
 
@@ -96,6 +102,7 @@ def t_error(t):
 
 def t_NEWLINE(t):
     r'\n+'
+    t.lexer.lineno += len(t.value)
 
 def t_CONSOLE(t):
     r'console.log'
@@ -141,6 +148,8 @@ def t_SLICE(t):
     r'[\.]slice'
     t.type = reservadas.get(t.value, 'SLICE')
     return t
+
+    
 
 
     
