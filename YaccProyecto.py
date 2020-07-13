@@ -7,7 +7,8 @@ def p_sentencias(p):
     '''sentencias : asignacion
     | expresion
     | metodos
-    | if'''
+    | if
+    | PALABRA ASIGNACION STRING'''
     p[0] = p[1]
 
 
@@ -21,7 +22,7 @@ def p_imprimir(p):
 
 
 def p_if(p):
-    '''if : IF LPAREN condicion RPAREN LLLAVES sentencias RLLAVES 
+    '''if : IF LPAREN condicion RPAREN LLLAVES sentencias RLLAVES
     '''
 
 
@@ -31,7 +32,6 @@ def p_else(p):
 
 def p_asignacion(p):
     'asignacion : PALABRA IGUAL expresion'
-    
 
 
 def p_expresion_suma(p):
@@ -43,6 +43,7 @@ def p_expresion_resta(p):
     'expresion : term MENOS factor'
     p[0] = p[1] - p[3]
 
+
 def p_expression_term(p):
     'expresion : term'
     p[0] = p[1]
@@ -51,7 +52,6 @@ def p_expression_term(p):
 def p_expresion_producto(p):
     'expresion : expresion PRODUCTO term'
     p[0] = p[1] * p[3]
-    
 
 
 def p_expresion_division(p):
@@ -61,8 +61,6 @@ def p_expresion_division(p):
 
 def p_expresion_potencia(p):
     'expresion : expresion POTENCIA term'
-
-
 
 
 def p_condicion(p):
@@ -88,12 +86,23 @@ def p_factor_var2(p):
     'factor : PALABRA'
     p[0] = p[1]
 
+
 def p_factor_expr(p):
     'factor : LPAREN expresion RPAREN'
     p[0] = p[2]
 
+def p_factor_lista(p):
+    'factor : LISTA'
+
+def p_factor_booleano(p):
+    'factor : BOOLEANO'
+
+def p_factor_objeto (p):
+    'factor : OBJETO'
+
 def p_error(p):
     print("Error de sintaxis:")
+
 
 # Construir parser
 parser = sintaxis.yacc()
@@ -105,3 +114,17 @@ while True:
     if not s: continue
     result = parser.parse(s)
     print(result)
+
+
+
+
+##ejemplos pobrar Christian Portilla
+##CREACION DE UNA LISTA
+## lista = ["hola","como","estas"]
+##CREACION DE UN BOOLEANO
+## booleano = true
+## CREACION DE UN OBJETO
+## carro= {"ford":"ranger"}
+## CREACION DE UNA CADENA DE CARACTERES
+## cadena = "hola soy un4 Cad3NA"
+
