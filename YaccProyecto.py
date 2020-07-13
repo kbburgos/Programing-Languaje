@@ -8,7 +8,7 @@ def p_sentencias(p):
     | expresion
     | metodos
     | if
-    | PALABRA ASIGNACION STRING'''
+    | PALABRA ASIGNACION FLOTANTE'''
     p[0] = p[1]
 
 
@@ -31,7 +31,7 @@ def p_else(p):
 
 
 def p_asignacion(p):
-    'asignacion : PALABRA IGUAL expresion'
+    'asignacion : PALABRA ASIGNACION expresion'
 
 
 def p_expresion_suma(p):
@@ -79,11 +79,6 @@ def p_factor_num(p):
 
 def p_factor_str(p):
     'factor : STRING'
-    p[0] = p[1]
-
-
-def p_factor_var2(p):
-    'factor : PALABRA'
     p[0] = p[1]
 
 
