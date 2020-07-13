@@ -123,3 +123,7 @@ while True:
 ## CREACION DE UNA CADENA DE CARACTERES
 ## cadena = "hola soy un4 Cad3NA"
 
+##ejemplos Damian Castillo
+##suma = 4 + 5 + 89
+##numero = 69
+## 5 ===9
