@@ -19,19 +19,24 @@ reservadas = {
     'chartAt': 'CHARTAT',
     'push': 'PUSH',
     'sort': 'SORT',
-    'copyWithing': 'COPYWHITIN',
     'new': 'NEW',
     'slice': 'SLICE',
-    'Set': 'SET',
+    'set': 'SET',
     'concat': 'CONCAT',
+    'var' : 'VAR',
+    'pop': 'POP',
 }
 
 tokens = ['MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN', 'IGUAL', 'COMA', 'COMILLA', 'PUNTO',
           'LCORCHETE', 'RCORCHETE', 'AND', 'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE',
-          'LISTA', 'STRING', 'BOOLEANO', 'OBJETO', 'PALABRA', 'LLLAVES', 'RLLAVES'] + list(reservadas.values())
+          'LISTA', 'STRING', 'BOOLEANO', 'OBJETO', 'PALABRA', 'LLLAVES', 'RLLAVES', 'PUNTOCOMA', 'MAYOR',
+          'MENOR', 'ASCENDER', 'DESCENDER'] + list(reservadas.values())
 
 # Simbolos matematicos y Operadores logicos
 t_PUNTO = r'\.'
+t_MAYOR= r'\>'
+t_MENOR= r'\<'
+t_PUNTOCOMA = r'\;'
 t_COMILLA = r'\"'
 t_MENOS = r'\-'
 t_MAS = r'\+'
@@ -64,8 +69,11 @@ t_WHILE = r'while'
 t_ELSE = r'else'
 t_ignore = ' \t'
 t_NEW = r'new'
-t_SET = r'Set'
+t_SET = r'set'
 t_STRING = r'".*?"'
+t_VAR = r'var'
+t_ASCENDER=r'\+\+'
+t_DESCENDER=r'\-\-'
 
 
 def t_NUMERO(t):
@@ -120,13 +128,19 @@ def t_PROMPT(t):
 
 
 def t_INCLUDE(t):
-    r'include'
+    r'[\.]include'
     t.type = reservadas.get(t.value, 'INCLUDE')
     return t
 
 
+def t_CONCAT(t):
+    r'[\.]concat'
+    t.type = reservadas.get(t.value, 'CONCAT')
+    return t
+
+
 def t_VALUEOF(t):
-    r'valueOf'
+    r'[\.]valueOf\(\)'
     t.type = reservadas.get(t.value, 'VALUEOF')
     return t
 
@@ -144,14 +158,14 @@ def t_PUSH(t):
 
 
 def t_SORT(t):
-    r'[\.]sort'
+    r'[\.]sort\(\)'
     t.type = reservadas.get(t.value, 'SORT')
     return t
 
 
-def t_COPYWITHING(t):
-    r'[\.]copyWithing'
-    t.type = reservadas.get(t.value, 'COPYWITHING')
+def t_POP(t):
+    r'[\.]pop\(\)'
+    t.type = reservadas.get(t.value, 'POP')
     return t
 
 
@@ -179,7 +193,9 @@ entradas = ['if', 'else', 'while', 'for',
             'variable.chartAt(3)',
             'console.log(word)',
             'prompt(word)',
-            'arreglo.concat(arreglo)']
+            'arreglo.concat(arreglo)'
+            'var variable=4',
+            '5++']
 
 analizadorP1 = lex.lex()
 for i in entradas:
