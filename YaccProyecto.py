@@ -7,31 +7,111 @@ def p_sentencias(p):
     '''sentencias : asignacion
     | expresion
     | metodos
-    | if
-    | PALABRA ASIGNACION FLOTANTE'''
+    | then'''
+    p[0] = p[1]
+
+
+def p_sentencias_control(p):
+    '''sentencias : if
+    | while
+    | for
+    | sort
+    | include
+    | valueOf
+    | chartAt
+    | push
+    | slice
+    | pop
+    | concat'''
     p[0] = p[1]
 
 
 def p_metodos(p):
-    '''metodos : imprimir
-    '''
+    'metodos : imprimir'
+    p[0]=('IMPRIMIR')
 
 
 def p_imprimir(p):
-    'imprimir : PROMPT factor'
+    'imprimir : PROMPT LPAREN factor RPAREN'
+
+
+def p_imprimir_consola(p):
+    '''imprimir : CONSOLE LPAREN factor RPAREN'''
 
 
 def p_if(p):
-    '''if : IF LPAREN condicion RPAREN LLLAVES sentencias RLLAVES
+    '''if : IF LPAREN condicion RPAREN sentencias
+    | IF LPAREN condicion RPAREN sentencias else
     '''
+    p[0]=('IF')
 
 
 def p_else(p):
     'else : ELSE LLLAVES sentencias RLLAVES'
 
 
+def p_while(p):
+    'while : WHILE LPAREN condicion RPAREN sentencias'
+    p[0] = ('WHILE')
+
+
+def p_for(p):
+    'for : FOR LPAREN VAR condicion PUNTOCOMA condicion PUNTOCOMA instruccion RPAREN'
+    p[0] = ('FOR')
+
+
+def p_sort(p):
+    'sort : LISTA SORT'
+    p[0]= ('SORT')
+
+
+def p_include(p):
+    'include : factor INCLUDE LPAREN factor RPAREN'
+    p[0]= ('INCLUDE')
+
+
+def p_valueOf(p):
+    'valueOf : factor VALUEOF'
+    p[0]= ('VALUEOF')
+
+
+def p_charAt(p):
+    'chartAt : factor CHARTAT LPAREN factor RPAREN'
+    p[0]= ('CHARAT')
+
+
+def p_push(p):
+    'push : factor PUSH LPAREN factor RPAREN'
+    p[0] = ('PUSH')
+
+
+def p_slice(p):
+    'slice : factor SLICE LPAREN factor COMA factor RPAREN'
+    p[0] = ('SLICE')
+
+
+def p_pop(p):
+    'pop : factor POP '
+    p[0] = ('POP')
+
+
+def p_concat(p):
+    'concat : factor CONCAT LPAREN factor RPAREN'
+    p[0] = ('CONCAT')
+
+
+def p_instruccion(p):
+    '''instruccion : factor ASCENDER
+    | factor DESCENDER'''
+
+
+def p_then(p):
+    'then : LLLAVES sentencias RLLAVES'
+
+
 def p_asignacion(p):
     'asignacion : PALABRA ASIGNACION expresion'
+    p[0] = ('ASIGNACION')
 
 
 def p_expresion_suma(p):
@@ -49,7 +129,6 @@ def p_expression_term(p):
     p[0] = p[1]
 
 
-
 def p_expresion_producto(p):
     'expresion : expresion PRODUCTO term'
     p[0] = p[1] * p[3]
@@ -62,21 +141,49 @@ def p_expresion_division(p):
 
 def p_expresion_potencia(p):
     'expresion : expresion POTENCIA term'
+    p[0] = p[1] ** p[3]
 
 
+#validar con expresiones
 def p_condicion(p):
-    'condicion : factor IGUAL factor'
+    '''condicion : factor IGUAL factor
+    | factor MAYOR factor
+    | factor MENOR factor
+    | factor ASIGNACION factor
+    | NOT factor
+    | factor DIFERENTE factor
+    | compuesta AND condicion
+    | compuesta OR condicion
+    | compuesta
+    '''
+
+
+def p_compuesta(p):
+    '''compuesta : LPAREN condicion RPAREN'''
 
 
 def p_term_factor(p):
     'term : factor'
     p[0] = p[1]
 
+
 def p_factor_set(p):
     'factor : NEW SET LPAREN LISTA RPAREN'
+    p[0]=('CONJUNTO')
+
 
 def p_factor_num(p):
     'factor : NUMERO'
+    p[0] = p[1]
+
+
+def p_factor_flot(p):
+    'factor : FLOTANTE'
+    p[0] = p[1]
+
+
+def p_factor_pal(p):
+    'factor : PALABRA'
     p[0] = p[1]
 
 
@@ -89,14 +196,21 @@ def p_factor_expr(p):
     'factor : LPAREN expresion RPAREN'
     p[0] = p[2]
 
+
 def p_factor_lista(p):
     'factor : LISTA'
+    p[0] = ('LISTA')
+
 
 def p_factor_booleano(p):
     'factor : BOOLEANO'
+    p[0] = ('BOOLEANO')
+
 
 def p_factor_objeto (p):
     'factor : OBJETO'
+    p[0] = ('OBJETO')
+
 
 def p_error(p):
     print("Error de sintaxis:")

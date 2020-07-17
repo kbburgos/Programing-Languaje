@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND ASIGNACION BOOLEANO CHARTAT COMA COMILLA CONCAT CONSOLE COPYWHITIN DIFERENTE DIVISION ELSE FLOTANTE FOR IF IGUAL INCLUDE LCORCHETE LISTA LLLAVES LPAREN MAS MENOS NEW NOT NUMERO OBJETO OR PALABRA POTENCIA PRODUCTO PROMPT PUNTO PUSH RCORCHETE RLLAVES RPAREN SET SLICE SORT STRING VALUEOF WHILEsentencias : asignacion\n    | expresion\n    | metodos\n    | if\n    | PALABRA ASIGNACION FLOTANTEmetodos : imprimir\n    imprimir : PROMPT factorif : IF LPAREN condicion RPAREN LLLAVES sentencias RLLAVES\n    else : ELSE LLLAVES sentencias RLLAVESasignacion : PALABRA ASIGNACION expresionexpresion : term MAS factorexpresion : term MENOS factorexpresion : termexpresion : expresion PRODUCTO termexpresion : expresion DIVISION termexpresion : expresion POTENCIA termcondicion : factor IGUAL factorterm : factorfactor : NEW SET LPAREN LISTA RPARENfactor : NUMEROfactor : STRINGfactor : LPAREN expresion RPARENfactor : LISTAfactor : BOOLEANOfactor : OBJETO'
+_lr_signature = 'AND ASCENDER ASIGNACION BOOLEANO CHARTAT COMA COMILLA CONCAT CONSOLE DESCENDER DIFERENTE DIVISION ELSE FLOTANTE FOR IF IGUAL INCLUDE LCORCHETE LISTA LLLAVES LPAREN MAS MAYOR MENOR MENOS NEW NOT NUMERO OBJETO OR PALABRA POP POTENCIA PRODUCTO PROMPT PUNTO PUNTOCOMA PUSH RCORCHETE RLLAVES RPAREN SET SLICE SORT STRING VALUEOF VAR WHILEsentencias : asignacion\n    | expresion\n    | metodos\n    | thensentencias : if\n    | while\n    | for\n    | sort\n    | include\n    | valueOf\n    | chartAt\n    | push\n    | slice\n    | pop\n    | concatmetodos : imprimirimprimir : PROMPT LPAREN factor RPARENimprimir : CONSOLE LPAREN factor RPARENif : IF LPAREN condicion RPAREN sentencias\n    | IF LPAREN condicion RPAREN sentencias else\n    else : ELSE LLLAVES sentencias RLLAVESwhile : WHILE LPAREN condicion RPAREN sentenciasfor : FOR LPAREN VAR condicion PUNTOCOMA condicion PUNTOCOMA instruccion RPARENsort : LISTA SORTinclude : factor INCLUDE LPAREN factor RPARENvalueOf : factor VALUEOFchartAt : factor CHARTAT LPAREN factor RPARENpush : factor PUSH LPAREN factor RPARENslice : factor SLICE LPAREN factor COMA factor RPARENpop : factor POP concat : factor CONCAT LPAREN factor RPARENinstruccion : factor ASCENDER\n    | factor DESCENDERthen : LLLAVES sentencias RLLAVESasignacion : PALABRA ASIGNACION expresionexpresion : term MAS factorexpresion : term MENOS factorexpresion : termexpresion : expresion PRODUCTO termexpresion : expresion DIVISION termexpresion : expresion POTENCIA termcondicion : factor IGUAL factor\n    | factor MAYOR factor\n    | factor MENOR factor\n    | factor ASIGNACION factor\n    | NOT factor\n    | factor DIFERENTE factor\n    | compuesta AND condicion\n    | compuesta OR condicion\n    | compuesta\n    compuesta : LPAREN condicion RPARENterm : factorfactor : NEW SET LPAREN LISTA RPARENfactor : NUMEROfactor : FLOTANTEfactor : PALABRAfactor : STRINGfactor : LPAREN expresion RPARENfactor : LISTAfactor : BOOLEANOfactor : OBJETO'
     
-_lr_action_items = {'PALABRA':([0,43,],[6,6,]),'IF':([0,43,],[10,10,]),'PROMPT':([0,43,],[12,12,]),'NEW':([0,11,12,19,20,21,22,23,24,25,41,43,],[13,13,13,13,13,13,13,13,13,13,13,13,]),'NUMERO':([0,11,12,19,20,21,22,23,24,25,41,43,],[15,15,15,15,15,15,15,15,15,15,15,15,]),'STRING':([0,11,12,19,20,21,22,23,24,25,41,43,],[16,16,16,16,16,16,16,16,16,16,16,16,]),'LPAREN':([0,10,11,12,19,20,21,22,23,24,25,28,41,43,],[11,25,11,11,11,11,11,11,11,11,11,39,11,11,]),'LISTA':([0,11,12,19,20,21,22,23,24,25,39,41,43,],[14,14,14,14,14,14,14,14,14,14,42,14,14,]),'BOOLEANO':([0,11,12,19,20,21,22,23,24,25,41,43,],[17,17,17,17,17,17,17,17,17,17,17,17,]),'OBJETO':([0,11,12,19,20,21,22,23,24,25,41,43,],[18,18,18,18,18,18,18,18,18,18,18,18,]),'$end':([1,2,3,4,5,7,8,9,14,15,16,17,18,27,29,30,31,32,33,34,35,38,45,47,],[0,-1,-2,-3,-4,-13,-18,-6,-23,-20,-21,-24,-25,-7,-14,-15,-16,-5,-10,-11,-12,-22,-19,-8,]),'RLLAVES':([2,3,4,5,7,8,9,14,15,16,17,18,27,29,30,31,32,33,34,35,38,45,46,47,],[-1,-2,-3,-4,-13,-18,-6,-23,-20,-21,-24,-25,-7,-14,-15,-16,-5,-10,-11,-12,-22,-19,47,-8,]),'PRODUCTO':([3,7,8,14,15,16,17,18,26,29,30,31,33,34,35,38,45,],[19,-13,-18,-23,-20,-21,-24,-25,19,-14,-15,-16,19,-11,-12,-22,-19,]),'DIVISION':([3,7,8,14,15,16,17,18,26,29,30,31,33,34,35,38,45,],[20,-13,-18,-23,-20,-21,-24,-25,20,-14,-15,-16,20,-11,-12,-22,-19,]),'POTENCIA':([3,7,8,14,15,16,17,18,26,29,30,31,33,34,35,38,45,],[21,-13,-18,-23,-20,-21,-24,-25,21,-14,-15,-16,21,-11,-12,-22,-19,]),'ASIGNACION':([6,],[22,]),'MAS':([7,8,14,15,16,17,18,38,45,],[23,-18,-23,-20,-21,-24,-25,-22,-19,]),'MENOS':([7,8,14,15,16,17,18,38,45,],[24,-18,-23,-20,-21,-24,-25,-22,-19,]),'RPAREN':([7,8,14,15,16,17,18,26,29,30,31,34,35,36,38,42,44,45,],[-13,-18,-23,-20,-21,-24,-25,38,-14,-15,-16,-11,-12,40,-22,45,-17,-19,]),'SET':([13,],[28,]),'IGUAL':([14,15,16,17,18,37,38,45,],[-23,-20,-21,-24,-25,41,-22,-19,]),'FLOTANTE':([22,],[32,]),'LLLAVES':([40,],[43,]),}
+_lr_action_items = {'PALABRA':([0,21,23,35,36,37,38,39,40,49,54,57,58,66,67,68,69,70,72,75,79,90,91,92,93,94,95,97,98,99,107,119,126,127,],[17,17,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,17,53,53,53,53,53,53,53,17,53,53,17,53,]),'LLLAVES':([0,21,90,99,123,126,],[21,21,21,21,126,21,]),'IF':([0,21,90,99,126,],[22,22,22,22,22,]),'WHILE':([0,21,90,99,126,],[24,24,24,24,24,]),'FOR':([0,21,90,99,126,],[25,25,25,25,25,]),'LISTA':([0,21,23,35,36,37,38,39,40,49,54,57,58,66,67,68,69,70,72,75,79,82,90,91,92,93,94,95,97,98,99,107,119,126,127,],[26,26,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,103,26,52,52,52,52,52,52,52,26,52,52,26,52,]),'PROMPT':([0,21,90,99,126,],[27,27,27,27,27,]),'CONSOLE':([0,21,90,99,126,],[28,28,28,28,28,]),'NEW':([0,21,23,35,36,37,38,39,40,49,54,57,58,66,67,68,69,70,72,75,79,90,91,92,93,94,95,97,98,99,107,119,126,127,],[29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,29,]),'NUMERO':([0,21,23,35,36,37,38,39,40,49,54,57,58,66,67,68,69,70,72,75,79,90,91,92,93,94,95,97,98,99,107,119,126,127,],[30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,30,]),'FLOTANTE':([0,21,23,35,36,37,38,39,40,49,54,57,58,66,67,68,69,70,72,75,79,90,91,92,93,94,95,97,98,99,107,119,126,127,],[31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,]),'STRING':([0,21,23,35,36,37,38,39,40,49,54,57,58,66,67,68,69,70,72,75,79,90,91,92,93,94,95,97,98,99,107,119,126,127,],[32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,]),'LPAREN':([0,21,22,23,24,25,27,28,35,36,37,38,39,40,41,43,44,45,47,49,54,57,58,59,66,67,68,69,70,72,75,79,90,91,92,93,94,95,97,98,99,107,119,126,127,],[23,23,49,23,54,55,57,58,23,23,23,23,23,23,66,67,68,69,70,72,72,23,23,82,23,23,23,23,23,72,23,72,23,23,23,23,23,23,72,72,23,23,72,23,23,]),'BOOLEANO':([0,21,23,35,36,37,38,39,40,49,54,57,58,66,67,68,69,70,72,75,79,90,91,92,93,94,95,97,98,99,107,119,126,127,],[33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,]),'OBJETO':([0,21,23,35,36,37,38,39,40,49,54,57,58,66,67,68,69,70,72,75,79,90,91,92,93,94,95,97,98,99,107,119,126,127,],[34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,34,]),'$end':([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,26,30,31,32,33,34,42,46,51,52,53,56,60,61,62,63,64,65,71,77,101,102,104,105,106,108,110,118,120,122,125,131,132,],[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-56,-38,-52,-16,-59,-54,-55,-57,-60,-61,-26,-30,-52,-59,-56,-24,-39,-40,-41,-35,-36,-37,-34,-58,-17,-18,-25,-27,-28,-31,-19,-22,-53,-20,-29,-21,-23,]),'RLLAVES':([2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,26,30,31,32,33,34,42,46,48,51,52,53,56,60,61,62,63,64,65,71,77,101,102,104,105,106,108,110,118,120,122,125,128,131,132,],[-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-56,-38,-52,-16,-59,-54,-55,-57,-60,-61,-26,-30,71,-52,-59,-56,-24,-39,-40,-41,-35,-36,-37,-34,-58,-17,-18,-25,-27,-28,-31,-19,-22,-53,-20,-29,131,-21,-23,]),'ELSE':([2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,26,30,31,32,33,34,42,46,51,52,53,56,60,61,62,63,64,65,71,77,101,102,104,105,106,108,110,118,120,122,125,131,132,],[-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-11,-12,-13,-14,-15,-56,-38,-52,-16,-59,-54,-55,-57,-60,-61,-26,-30,-52,-59,-56,-24,-39,-40,-41,-35,-36,-37,-34,-58,-17,-18,-25,-27,-28,-31,123,-22,-53,-20,-29,-21,-23,]),'PRODUCTO':([3,17,18,19,26,30,31,32,33,34,50,51,52,53,60,61,62,63,64,65,77,89,120,],[35,-56,-38,-52,-59,-54,-55,-57,-60,-61,35,-52,-59,-56,-39,-40,-41,35,-36,-37,-58,-52,-53,]),'DIVISION':([3,17,18,19,26,30,31,32,33,34,50,51,52,53,60,61,62,63,64,65,77,89,120,],[36,-56,-38,-52,-59,-54,-55,-57,-60,-61,36,-52,-59,-56,-39,-40,-41,36,-36,-37,-58,-52,-53,]),'POTENCIA':([3,17,18,19,26,30,31,32,33,34,50,51,52,53,60,61,62,63,64,65,77,89,120,],[37,-56,-38,-52,-59,-54,-55,-57,-60,-61,37,-52,-59,-56,-39,-40,-41,37,-36,-37,-58,-52,-53,]),'ASIGNACION':([17,30,31,32,33,34,52,53,74,77,89,120,],[38,-54,-55,-57,-60,-61,-59,-56,94,-58,94,-53,]),'INCLUDE':([17,19,26,30,31,32,33,34,77,120,],[-56,41,-59,-54,-55,-57,-60,-61,-58,-53,]),'VALUEOF':([17,19,26,30,31,32,33,34,77,120,],[-56,42,-59,-54,-55,-57,-60,-61,-58,-53,]),'CHARTAT':([17,19,26,30,31,32,33,34,77,120,],[-56,43,-59,-54,-55,-57,-60,-61,-58,-53,]),'PUSH':([17,19,26,30,31,32,33,34,77,120,],[-56,44,-59,-54,-55,-57,-60,-61,-58,-53,]),'SLICE':([17,19,26,30,31,32,33,34,77,120,],[-56,45,-59,-54,-55,-57,-60,-61,-58,-53,]),'POP':([17,19,26,30,31,32,33,34,77,120,],[-56,46,-59,-54,-55,-57,-60,-61,-58,-53,]),'CONCAT':([17,19,26,30,31,32,33,34,77,120,],[-56,47,-59,-54,-55,-57,-60,-61,-58,-53,]),'MAS':([17,18,19,26,30,31,32,33,34,51,52,53,77,89,120,],[-56,39,-52,-59,-54,-55,-57,-60,-61,-52,-59,-56,-58,-52,-53,]),'MENOS':([17,18,19,26,30,31,32,33,34,51,52,53,77,89,120,],[-56,40,-52,-59,-54,-55,-57,-60,-61,-52,-59,-56,-58,-52,-53,]),'RPAREN':([18,30,31,32,33,34,50,51,52,53,60,61,62,64,65,73,76,77,78,80,81,83,84,85,87,88,89,96,103,109,111,112,113,114,115,116,117,120,121,129,133,134,],[-38,-54,-55,-57,-60,-61,77,-52,-59,-56,-39,-40,-41,-36,-37,90,-50,-58,99,101,102,104,105,106,108,109,-52,-46,120,-51,-42,-43,-44,-45,-47,-48,-49,-53,125,132,-32,-33,]),'SORT':([26,],[56,]),'SET':([29,],[59,]),'IGUAL':([30,31,32,33,34,52,53,74,77,89,120,],[-54,-55,-57,-60,-61,-59,-56,91,-58,91,-53,]),'MAYOR':([30,31,32,33,34,52,53,74,77,89,120,],[-54,-55,-57,-60,-61,-59,-56,92,-58,92,-53,]),'MENOR':([30,31,32,33,34,52,53,74,77,89,120,],[-54,-55,-57,-60,-61,-59,-56,93,-58,93,-53,]),'DIFERENTE':([30,31,32,33,34,52,53,74,77,89,120,],[-54,-55,-57,-60,-61,-59,-56,95,-58,95,-53,]),'COMA':([30,31,32,33,34,52,53,77,86,120,],[-54,-55,-57,-60,-61,-59,-56,-58,107,-53,]),'PUNTOCOMA':([30,31,32,33,34,52,53,76,77,96,100,109,111,112,113,114,115,116,117,120,124,],[-54,-55,-57,-60,-61,-59,-56,-50,-58,-46,119,-51,-42,-43,-44,-45,-47,-48,-49,-53,127,]),'ASCENDER':([30,31,32,33,34,52,53,77,120,130,],[-54,-55,-57,-60,-61,-59,-56,-58,-53,133,]),'DESCENDER':([30,31,32,33,34,52,53,77,120,130,],[-54,-55,-57,-60,-61,-59,-56,-58,-53,134,]),'NOT':([49,54,72,79,97,98,119,],[75,75,75,75,75,75,75,]),'VAR':([55,],[79,]),'AND':([76,109,],[97,-51,]),'OR':([76,109,],[98,-51,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'sentencias':([0,43,],[1,46,]),'asignacion':([0,43,],[2,2,]),'expresion':([0,11,22,43,],[3,26,33,3,]),'metodos':([0,43,],[4,4,]),'if':([0,43,],[5,5,]),'term':([0,11,19,20,21,22,43,],[7,7,29,30,31,7,7,]),'factor':([0,11,12,19,20,21,22,23,24,25,41,43,],[8,8,27,8,8,8,8,34,35,37,44,8,]),'imprimir':([0,43,],[9,9,]),'condicion':([25,],[36,]),}
+_lr_goto_items = {'sentencias':([0,21,90,99,126,],[1,48,110,118,128,]),'asignacion':([0,21,90,99,126,],[2,2,2,2,2,]),'expresion':([0,21,23,38,72,90,99,126,],[3,3,50,63,50,3,3,3,]),'metodos':([0,21,90,99,126,],[4,4,4,4,4,]),'then':([0,21,90,99,126,],[5,5,5,5,5,]),'if':([0,21,90,99,126,],[6,6,6,6,6,]),'while':([0,21,90,99,126,],[7,7,7,7,7,]),'for':([0,21,90,99,126,],[8,8,8,8,8,]),'sort':([0,21,90,99,126,],[9,9,9,9,9,]),'include':([0,21,90,99,126,],[10,10,10,10,10,]),'valueOf':([0,21,90,99,126,],[11,11,11,11,11,]),'chartAt':([0,21,90,99,126,],[12,12,12,12,12,]),'push':([0,21,90,99,126,],[13,13,13,13,13,]),'slice':([0,21,90,99,126,],[14,14,14,14,14,]),'pop':([0,21,90,99,126,],[15,15,15,15,15,]),'concat':([0,21,90,99,126,],[16,16,16,16,16,]),'term':([0,21,23,35,36,37,38,72,90,99,126,],[18,18,18,60,61,62,18,18,18,18,18,]),'factor':([0,21,23,35,36,37,38,39,40,49,54,57,58,66,67,68,69,70,72,75,79,90,91,92,93,94,95,97,98,99,107,119,126,127,],[19,19,51,51,51,51,51,64,65,74,74,80,81,83,84,85,86,87,89,96,74,19,111,112,113,114,115,74,74,19,121,74,19,130,]),'imprimir':([0,21,90,99,126,],[20,20,20,20,20,]),'condicion':([49,54,72,79,97,98,119,],[73,78,88,100,116,117,124,]),'compuesta':([49,54,72,79,97,98,119,],[76,76,76,76,76,76,76,]),'else':([110,],[122,]),'instruccion':([127,],[129,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -30,26 +30,62 @@ _lr_productions = [
   ('sentencias -> asignacion','sentencias',1,'p_sentencias','YaccProyecto.py',7),
   ('sentencias -> expresion','sentencias',1,'p_sentencias','YaccProyecto.py',8),
   ('sentencias -> metodos','sentencias',1,'p_sentencias','YaccProyecto.py',9),
-  ('sentencias -> if','sentencias',1,'p_sentencias','YaccProyecto.py',10),
-  ('sentencias -> PALABRA ASIGNACION FLOTANTE','sentencias',3,'p_sentencias','YaccProyecto.py',11),
-  ('metodos -> imprimir','metodos',1,'p_metodos','YaccProyecto.py',16),
-  ('imprimir -> PROMPT factor','imprimir',2,'p_imprimir','YaccProyecto.py',21),
-  ('if -> IF LPAREN condicion RPAREN LLLAVES sentencias RLLAVES','if',7,'p_if','YaccProyecto.py',25),
-  ('else -> ELSE LLLAVES sentencias RLLAVES','else',4,'p_else','YaccProyecto.py',30),
-  ('asignacion -> PALABRA ASIGNACION expresion','asignacion',3,'p_asignacion','YaccProyecto.py',34),
-  ('expresion -> term MAS factor','expresion',3,'p_expresion_suma','YaccProyecto.py',38),
-  ('expresion -> term MENOS factor','expresion',3,'p_expresion_resta','YaccProyecto.py',43),
-  ('expresion -> term','expresion',1,'p_expression_term','YaccProyecto.py',48),
-  ('expresion -> expresion PRODUCTO term','expresion',3,'p_expresion_producto','YaccProyecto.py',54),
-  ('expresion -> expresion DIVISION term','expresion',3,'p_expresion_division','YaccProyecto.py',59),
-  ('expresion -> expresion POTENCIA term','expresion',3,'p_expresion_potencia','YaccProyecto.py',64),
-  ('condicion -> factor IGUAL factor','condicion',3,'p_condicion','YaccProyecto.py',68),
-  ('term -> factor','term',1,'p_term_factor','YaccProyecto.py',72),
-  ('factor -> NEW SET LPAREN LISTA RPAREN','factor',5,'p_factor_set','YaccProyecto.py',76),
-  ('factor -> NUMERO','factor',1,'p_factor_num','YaccProyecto.py',79),
-  ('factor -> STRING','factor',1,'p_factor_str','YaccProyecto.py',84),
-  ('factor -> LPAREN expresion RPAREN','factor',3,'p_factor_expr','YaccProyecto.py',89),
-  ('factor -> LISTA','factor',1,'p_factor_lista','YaccProyecto.py',93),
-  ('factor -> BOOLEANO','factor',1,'p_factor_booleano','YaccProyecto.py',96),
-  ('factor -> OBJETO','factor',1,'p_factor_objeto','YaccProyecto.py',99),
+  ('sentencias -> then','sentencias',1,'p_sentencias','YaccProyecto.py',10),
+  ('sentencias -> if','sentencias',1,'p_sentencias_control','YaccProyecto.py',15),
+  ('sentencias -> while','sentencias',1,'p_sentencias_control','YaccProyecto.py',16),
+  ('sentencias -> for','sentencias',1,'p_sentencias_control','YaccProyecto.py',17),
+  ('sentencias -> sort','sentencias',1,'p_sentencias_control','YaccProyecto.py',18),
+  ('sentencias -> include','sentencias',1,'p_sentencias_control','YaccProyecto.py',19),
+  ('sentencias -> valueOf','sentencias',1,'p_sentencias_control','YaccProyecto.py',20),
+  ('sentencias -> chartAt','sentencias',1,'p_sentencias_control','YaccProyecto.py',21),
+  ('sentencias -> push','sentencias',1,'p_sentencias_control','YaccProyecto.py',22),
+  ('sentencias -> slice','sentencias',1,'p_sentencias_control','YaccProyecto.py',23),
+  ('sentencias -> pop','sentencias',1,'p_sentencias_control','YaccProyecto.py',24),
+  ('sentencias -> concat','sentencias',1,'p_sentencias_control','YaccProyecto.py',25),
+  ('metodos -> imprimir','metodos',1,'p_metodos','YaccProyecto.py',30),
+  ('imprimir -> PROMPT LPAREN factor RPAREN','imprimir',4,'p_imprimir','YaccProyecto.py',35),
+  ('imprimir -> CONSOLE LPAREN factor RPAREN','imprimir',4,'p_imprimir_consola','YaccProyecto.py',39),
+  ('if -> IF LPAREN condicion RPAREN sentencias','if',5,'p_if','YaccProyecto.py',43),
+  ('if -> IF LPAREN condicion RPAREN sentencias else','if',6,'p_if','YaccProyecto.py',44),
+  ('else -> ELSE LLLAVES sentencias RLLAVES','else',4,'p_else','YaccProyecto.py',50),
+  ('while -> WHILE LPAREN condicion RPAREN sentencias','while',5,'p_while','YaccProyecto.py',54),
+  ('for -> FOR LPAREN VAR condicion PUNTOCOMA condicion PUNTOCOMA instruccion RPAREN','for',9,'p_for','YaccProyecto.py',59),
+  ('sort -> LISTA SORT','sort',2,'p_sort','YaccProyecto.py',64),
+  ('include -> factor INCLUDE LPAREN factor RPAREN','include',5,'p_include','YaccProyecto.py',69),
+  ('valueOf -> factor VALUEOF','valueOf',2,'p_valueOf','YaccProyecto.py',74),
+  ('chartAt -> factor CHARTAT LPAREN factor RPAREN','chartAt',5,'p_charAt','YaccProyecto.py',79),
+  ('push -> factor PUSH LPAREN factor RPAREN','push',5,'p_push','YaccProyecto.py',84),
+  ('slice -> factor SLICE LPAREN factor COMA factor RPAREN','slice',7,'p_slice','YaccProyecto.py',89),
+  ('pop -> factor POP','pop',2,'p_pop','YaccProyecto.py',94),
+  ('concat -> factor CONCAT LPAREN factor RPAREN','concat',5,'p_concat','YaccProyecto.py',99),
+  ('instruccion -> factor ASCENDER','instruccion',2,'p_instruccion','YaccProyecto.py',104),
+  ('instruccion -> factor DESCENDER','instruccion',2,'p_instruccion','YaccProyecto.py',105),
+  ('then -> LLLAVES sentencias RLLAVES','then',3,'p_then','YaccProyecto.py',109),
+  ('asignacion -> PALABRA ASIGNACION expresion','asignacion',3,'p_asignacion','YaccProyecto.py',113),
+  ('expresion -> term MAS factor','expresion',3,'p_expresion_suma','YaccProyecto.py',118),
+  ('expresion -> term MENOS factor','expresion',3,'p_expresion_resta','YaccProyecto.py',123),
+  ('expresion -> term','expresion',1,'p_expression_term','YaccProyecto.py',128),
+  ('expresion -> expresion PRODUCTO term','expresion',3,'p_expresion_producto','YaccProyecto.py',133),
+  ('expresion -> expresion DIVISION term','expresion',3,'p_expresion_division','YaccProyecto.py',138),
+  ('expresion -> expresion POTENCIA term','expresion',3,'p_expresion_potencia','YaccProyecto.py',143),
+  ('condicion -> factor IGUAL factor','condicion',3,'p_condicion','YaccProyecto.py',149),
+  ('condicion -> factor MAYOR factor','condicion',3,'p_condicion','YaccProyecto.py',150),
+  ('condicion -> factor MENOR factor','condicion',3,'p_condicion','YaccProyecto.py',151),
+  ('condicion -> factor ASIGNACION factor','condicion',3,'p_condicion','YaccProyecto.py',152),
+  ('condicion -> NOT factor','condicion',2,'p_condicion','YaccProyecto.py',153),
+  ('condicion -> factor DIFERENTE factor','condicion',3,'p_condicion','YaccProyecto.py',154),
+  ('condicion -> compuesta AND condicion','condicion',3,'p_condicion','YaccProyecto.py',155),
+  ('condicion -> compuesta OR condicion','condicion',3,'p_condicion','YaccProyecto.py',156),
+  ('condicion -> compuesta','condicion',1,'p_condicion','YaccProyecto.py',157),
+  ('compuesta -> LPAREN condicion RPAREN','compuesta',3,'p_compuesta','YaccProyecto.py',162),
+  ('term -> factor','term',1,'p_term_factor','YaccProyecto.py',166),
+  ('factor -> NEW SET LPAREN LISTA RPAREN','factor',5,'p_factor_set','YaccProyecto.py',171),
+  ('factor -> NUMERO','factor',1,'p_factor_num','YaccProyecto.py',176),
+  ('factor -> FLOTANTE','factor',1,'p_factor_flot','YaccProyecto.py',181),
+  ('factor -> PALABRA','factor',1,'p_factor_pal','YaccProyecto.py',186),
+  ('factor -> STRING','factor',1,'p_factor_str','YaccProyecto.py',191),
+  ('factor -> LPAREN expresion RPAREN','factor',3,'p_factor_expr','YaccProyecto.py',196),
+  ('factor -> LISTA','factor',1,'p_factor_lista','YaccProyecto.py',201),
+  ('factor -> BOOLEANO','factor',1,'p_factor_booleano','YaccProyecto.py',206),
+  ('factor -> OBJETO','factor',1,'p_factor_objeto','YaccProyecto.py',211),
 ]
