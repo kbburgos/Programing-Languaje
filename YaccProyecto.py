@@ -49,6 +49,7 @@ def p_expression_term(p):
     p[0] = p[1]
 
 
+
 def p_expresion_producto(p):
     'expresion : expresion PRODUCTO term'
     p[0] = p[1] * p[3]
@@ -71,6 +72,8 @@ def p_term_factor(p):
     'term : factor'
     p[0] = p[1]
 
+def p_factor_set(p):
+    'factor : NEW SET LPAREN LISTA RPAREN'
 
 def p_factor_num(p):
     'factor : NUMERO'

@@ -22,7 +22,7 @@ reservadas = {
     'copyWithing': 'COPYWHITIN',
     'new': 'NEW',
     'slice': 'SLICE',
-    'set': 'SET',
+    'Set': 'SET',
     'concat': 'CONCAT',
 }
 
@@ -64,7 +64,7 @@ t_WHILE = r'while'
 t_ELSE = r'else'
 t_ignore = ' \t'
 t_NEW = r'new'
-t_SET = r'set'
+t_SET = r'Set'
 t_STRING = r'".*?"'
 
 
@@ -252,6 +252,7 @@ ejercicio = ['listaNumeros= [1,2,3,4]',
              'objetoCarro={"marca" : "ford"}',
              'booleano = true',
              'cadena ="soy una cadena de texto y nUMER02"'
+             'con = new Set (["a","b"])'
              ]
 analizadorP5 = lex.lex()
 for i in ejercicio:
