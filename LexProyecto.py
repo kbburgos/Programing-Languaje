@@ -30,7 +30,7 @@ reservadas = {
 tokens = ['MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN', 'IGUAL', 'COMA','AND',
           'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE',
           'LISTA', 'STRING', 'BOOLEANO', 'OBJETO', 'PALABRA', 'LLLAVES', 'RLLAVES', 'PUNTOCOMA', 'MAYOR',
-          'MENOR', 'ASCENDER', 'DESCENDER', 'NEWLINE'] + list(reservadas.values())
+          'MENOR', 'ASCENDER', 'DESCENDER'] + list(reservadas.values())
 
 # Simbolos matematicos y Operadores logicos
 #t_PUNTO = r'\.'

@@ -107,7 +107,7 @@ def p_instruccion(p):
 
 
 def p_then(p):
-    'then : NEWLINE LLLAVES sentencias RLLAVES'
+    'then : LLLAVES sentencias RLLAVES'
 
 
 def p_asignacion(p):
@@ -224,14 +224,7 @@ def p_factor_objeto (p):
 
 
 def p_error(p):
-    if p:
-        print("Error de Sintaxis en el token", p.type)
-        # Just discard the token and tell the parser it's okay.
-        print("En la linea", line)
-        parser.errok()
-    else:
-        print("Error de Sintaxis en  linea", line)
-
+    print("Error de sintaxis:")
 
 # Construir parser
 parser = sintaxis.yacc()
