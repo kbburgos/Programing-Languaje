@@ -34,6 +34,7 @@ def p_metodos(p):
 
 def p_imprimir(p):
     'imprimir : PROMPT LPAREN factor RPAREN'
+    p[0]= ('PROMPT')
 
 
 def p_imprimir_consola(p):
@@ -49,7 +50,7 @@ def p_if(p):
 
 def p_else(p):
     'else : then'
-
+    p[0]= ('THEN')
 
 def p_while(p):
     'while : WHILE LPAREN condicion RPAREN then'
