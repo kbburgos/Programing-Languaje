@@ -27,17 +27,17 @@ reservadas = {
     'pop': 'POP',
 }
 
-tokens = ['MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN', 'IGUAL', 'COMA', 'COMILLA', 'PUNTO',
-          'LCORCHETE', 'RCORCHETE', 'AND', 'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE',
+tokens = ['MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN', 'IGUAL', 'COMA','AND',
+          'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE',
           'LISTA', 'STRING', 'BOOLEANO', 'OBJETO', 'PALABRA', 'LLLAVES', 'RLLAVES', 'PUNTOCOMA', 'MAYOR',
           'MENOR', 'ASCENDER', 'DESCENDER'] + list(reservadas.values())
 
 # Simbolos matematicos y Operadores logicos
-t_PUNTO = r'\.'
+#t_PUNTO = r'\.'
 t_MAYOR= r'\>'
 t_MENOR= r'\<'
 t_PUNTOCOMA = r'\;'
-t_COMILLA = r'\"'
+#t_COMILLA = r'\"'
 t_MENOS = r'\-'
 t_MAS = r'\+'
 t_PRODUCTO = r'\*'
@@ -47,8 +47,8 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_IGUAL = r'==='
 t_POTENCIA = r'\*\*'
-t_LCORCHETE = r'\['
-t_RCORCHETE = r'\]'
+#t_LCORCHETE = r'\['
+#t_RCORCHETE = r'\]'
 t_LLLAVES = r'\{'
 t_RLLAVES = r'\}'
 t_COMA = r'\,'

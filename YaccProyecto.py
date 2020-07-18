@@ -144,6 +144,16 @@ def p_expresion_potencia(p):
     p[0] = p[1] ** p[3]
 
 
+def p_expresion_mayor(p):
+    'expresion : term MAYOR factor'
+    p[0] = p[1] > p[3]
+
+
+def p_expresion_menor(p):
+    'expresion : term MENOR factor'
+    p[0] = p[1] < p[3]
+
+
 #validar con expresiones
 def p_condicion(p):
     '''condicion : factor IGUAL factor
