@@ -107,7 +107,7 @@ def p_instruccion(p):
 
 
 def p_then(p):
-    'then : LLLAVES sentencias RLLAVES'
+    'then : NEWLINE LLLAVES sentencias RLLAVES'
 
 
 def p_asignacion(p):
@@ -261,3 +261,8 @@ while True:
 ##suma = 4 + 5 + 89
 ##numero = 69
 ## 5 ===9
+
+
+
+#Ejemplos Karla Burgos
+#IF if((5>4)||(9>0)&&(4>6)){palabra=3}
