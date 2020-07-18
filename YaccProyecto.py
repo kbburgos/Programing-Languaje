@@ -7,7 +7,7 @@ def p_sentencias(p):
     '''sentencias : asignacion
     | expresion
     | metodos
-    | then'''
+    '''
     p[0] = p[1]
     line = p.lineno(1)   
 
@@ -41,23 +41,23 @@ def p_imprimir_consola(p):
 
 
 def p_if(p):
-    '''if : IF LPAREN condicion RPAREN sentencias
-    | IF LPAREN condicion RPAREN sentencias else
+    '''if : IF LPAREN condicion RPAREN then
+    | IF LPAREN condicion RPAREN then else
     '''
     p[0]=('IF')
 
 
 def p_else(p):
-    'else : ELSE LLLAVES sentencias RLLAVES'
+    'else : then'
 
 
 def p_while(p):
-    'while : WHILE LPAREN condicion RPAREN sentencias'
+    'while : WHILE LPAREN condicion RPAREN then'
     p[0] = ('WHILE')
 
 
 def p_for(p):
-    'for : FOR LPAREN VAR condicion PUNTOCOMA condicion PUNTOCOMA instruccion RPAREN'
+    'for : FOR LPAREN VAR condicion PUNTOCOMA condicion PUNTOCOMA instruccion RPAREN then'
     p[0] = ('FOR')
 
 
