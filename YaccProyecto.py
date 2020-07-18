@@ -1,7 +1,7 @@
 import ply.yacc as sintaxis
 import LexProyecto
 tokens = LexProyecto.tokens
-line = 0
+line = 1
 
 def p_sentencias(p):
     '''sentencias : asignacion
@@ -225,8 +225,16 @@ def p_factor_objeto (p):
 
 
 def p_error(p):
-    print("Error de sintaxis:")
-
+    if p:
+        print("Error de Sintaxis en token", p.type)
+        # Just discard the token and tell the parser it's okay.
+        print("Error en linea: ", line)
+        
+        parser.errok()
+    else:
+        print("Error de sintaxis en linea:",line)
+        
+        
 
 # Construir parser
 parser = sintaxis.yacc()
