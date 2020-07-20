@@ -38,7 +38,7 @@ def p_imprimir(p):
 
 
 def p_imprimir_consola(p):
-    '''imprimir : CONSOLE LPAREN factor RPAREN'''
+    '''imprimir : CONSOLE PUNTO LOG LPAREN factor RPAREN'''
 
 
 def p_if(p):
@@ -49,8 +49,8 @@ def p_if(p):
 
 
 def p_else(p):
-    'else : then'
-    p[0]= ('THEN')
+    'else : ELSE then'
+    p[0]= ('ELSE')
 
 def p_while(p):
     'while : WHILE LPAREN condicion RPAREN then'
@@ -238,14 +238,15 @@ def p_error(p):
 
 # Construir parser
 parser = sintaxis.yacc()
-while True:
-    try:
-        s = input('<JS?> ')
-    except EOFError:
-        break
-    if not s: continue
-    result = parser.parse(s)
-    print(result)
+#while True:
+   # try:
+       # s = input('<JS?> ')
+  #  except EOFError:
+       #break
+  #  if not s: continue
+   # result = parser.parse(s)
+   # print(result)
+
 
 
 

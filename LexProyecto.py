@@ -25,15 +25,16 @@ reservadas = {
     'concat': 'CONCAT',
     'var' : 'VAR',
     'pop': 'POP',
+    'log': 'LOG'
 }
 
 tokens = ['MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN', 'IGUAL', 'COMA','AND',
-          'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE',
+          'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE', 'PUNTO',
           'LISTA', 'STRING', 'BOOLEANO', 'OBJETO', 'PALABRA', 'LLLAVES', 'RLLAVES', 'PUNTOCOMA', 'MAYOR',
           'MENOR', 'ASCENDER', 'DESCENDER'] + list(reservadas.values())
 
 # Simbolos matematicos y Operadores logicos
-#t_PUNTO = r'\.'
+t_PUNTO = r'\.'
 t_MAYOR= r'\>'
 t_MENOR= r'\<'
 t_PUNTOCOMA = r'\;'
@@ -74,7 +75,7 @@ t_STRING = r'".*?"'
 t_VAR = r'var'
 t_ASCENDER=r'\+\+'
 t_DESCENDER=r'\-\-'
-
+t_LOG=r'log'
 
 def t_NUMERO(t):
     r'[0-9]+'
@@ -116,7 +117,7 @@ def t_NEWLINE(t):
 
 
 def t_CONSOLE(t):
-    r'console.log'
+    r'console'
     t.type = reservadas.get(t.value, 'CONSOLE')
     return t
 
@@ -191,7 +192,8 @@ entradas = ['if', 'else', 'while', 'for',
             'variable.slice(1,4)',
             'variable.push(word)',
             'variable.chartAt(3)',
-            'console.log(word)',
+            'consolelog(word)',
+            'console.log(asda)',
             'prompt(word)',
             'arreglo.concat(arreglo)'
             'var variable=4',
@@ -204,6 +206,7 @@ for i in entradas:
         tokenRec = analizadorP1.token()
         if tokenRec != None:
             print(tokenRec)
+
         else:
             break
 

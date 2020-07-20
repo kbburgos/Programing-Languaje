@@ -1,7 +1,10 @@
 import sys
-import LexProyecto
 import ply.lex as lex
-tokens1=LexProyecto.tokens
+from LexProyecto import *
+from YaccProyecto import *
+
+
+
 
 
 
@@ -58,20 +61,21 @@ resultado.move(60,350)
 
 
 def analisisL():
-    tokens = tokens1
     text = codigo.toPlainText()
     resultado.clear()
     analizador = lex.lex()
     analizador.input(text)
 
 
+
+
     while True:
         tokenRec = analizador.token()
         if tokenRec != None:
+            resultado.appendPlainText(str(tokenRec))
             print(tokenRec)
         else:
             break
-
 
 botonLexer.clicked.connect(analisisL)
 
@@ -81,10 +85,15 @@ botonLexer.clicked.connect(analisisL)
 def analisisS():
     text = codigo.toPlainText()
     resultado.clear()
-    tokens = ["token1", "token2", "token3"]
-    for linea in tokens:
-        resultado.appendPlainText(linea)
-        print(linea)
+    parser = sintaxis.yacc()
+
+
+    s = text
+    #except EOFError:
+        
+    result = parser.parse(s)
+    resultado.appendPlainText(result)
+    print(result)
 
 
 botonSintactico.clicked.connect(analisisS)
