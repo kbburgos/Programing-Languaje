@@ -264,11 +264,43 @@ while True:
         break
 
 print("\nCHRISTIAN PORTILLA: EJERCICIOS VARIOS\n")
-ejercicio = ['listaNumeros= [1,2,3,4]',
-             'objetoCarro={"marca" : "ford"}',
-             'booleano = true',
-             'cadena ="soy una cadena de texto y nUMER02"'
-             'con = new Set (["a","b"])'
+ejercicio = ['if (5>3) {}',## Ejemplo con if ##
+             'else {}',## Ejemplo con else ##
+             'while (true) {}',## Ejemplo con while ##
+             'for elemento of lista',## Ejemplo con for ##
+             ## 'console.log("hola mundo")',## Ejemplo con console.log ##
+             'var estudiante = prompt("Ingrese su nombre: ", "Christian Portilla");'## Ejemplo con prompt ##
+             '"Capobu".includes("bu")',## Ejemplo con includes ##
+             '[].push("a","b")', ## Ejemplo con push ##
+             '[].sort()', ## Ejemplo con sort ##
+             'a = new set()', ## Ejemplo con new ##
+             '[].slice(0,2)', ## Ejemplo con slice ##
+             '"hola".concat(" mundo")' ## Ejemplo con concat ##
+             'conjunto = new set(["a","b"])', ## Ejemplo con set ##
+             'var variable = "soy una variable string"', ## Ejemplo con var ##c
+             '["a","b","c"].pop()', ## Ejemplo con pop ##
+             '5+4-7*(5/4)', ## Ejemplo con numero, mas, menos, division, producto , rparen, lparen ##
+             '5 === 5', ## Ejemplo con igual ##
+             'if ((5>3) &&  (4 === 4 ) || (!false) || (1!=2) && (5>2))', ##Ejemplo con and, or, not, diferente, mayor , menor ##
+             'asignacion  = "asignacion"', ## Ejemplo con Asignacion ##
+             'potencia = 5**8', ## Ejemplo con potencia ##
+             'lista = [2,3,4]', ## Ejemplo con lista ##
+             'cadena = "string soy"', ## Ejemplo con string ##
+             'bool =  true ', ## Ejemplo con booleando ##
+             'palabra = "soy una palabra "', ## Ejemplo con palabra ##
+             'llaves = {}', ## Ejemplos con lllave y rllave
+             'nombre = "Christian";', ##Ejemplo con punto y coma ##
+             'i ++', ## Ejemplo con ascender ##
+             'j --', ## Ejemplo con descender ##
+             '"cadena".valueOf()', ## Ejemplo con valueOf ##
+             'variable.chartAt(3)' ## Ejemplo con charAt
+
+
+
+
+
+
+
              ]
 analizadorP5 = lex.lex()
 for i in ejercicio:
