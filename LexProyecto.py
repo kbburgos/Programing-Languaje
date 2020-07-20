@@ -204,6 +204,7 @@ for i in entradas:
         tokenRec = analizadorP1.token()
         if tokenRec != None:
             print(tokenRec)
+
         else:
             break
 

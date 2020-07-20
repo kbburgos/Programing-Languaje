@@ -238,14 +238,15 @@ def p_error(p):
 
 # Construir parser
 parser = sintaxis.yacc()
-while True:
-    try:
-        s = input('<JS?> ')
-    except EOFError:
-        break
-    if not s: continue
-    result = parser.parse(s)
-    print(result)
+#while True:
+   # try:
+       # s = input('<JS?> ')
+  #  except EOFError:
+       #break
+  #  if not s: continue
+   # result = parser.parse(s)
+   # print(result)
+
 
 
 
