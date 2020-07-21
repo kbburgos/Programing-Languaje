@@ -4,10 +4,6 @@ from LexProyecto import *
 from YaccProyecto import *
 
 
-
-
-
-
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QWidget

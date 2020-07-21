@@ -7,6 +7,7 @@ def p_sentencias(p):
     '''sentencias : asignacion
     | expresion
     | metodos
+    | NEWLINE
     '''
     p[0] = p[1]
     line = p.lineno(1)   

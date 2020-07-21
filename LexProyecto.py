@@ -29,7 +29,7 @@ reservadas = {
 }
 
 tokens = ['MENOS', 'MAS', 'PRODUCTO', 'DIVISION', 'NUMERO', 'LPAREN', 'RPAREN', 'IGUAL', 'COMA','AND',
-          'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE', 'PUNTO',
+          'OR', 'NOT', 'DIFERENTE', 'ASIGNACION', 'POTENCIA', 'FLOTANTE', 'PUNTO', 'NEWLINE',
           'LISTA', 'STRING', 'BOOLEANO', 'OBJETO', 'PALABRA', 'LLLAVES', 'RLLAVES', 'PUNTOCOMA', 'MAYOR',
           'MENOR', 'ASCENDER', 'DESCENDER'] + list(reservadas.values())
 
@@ -197,7 +197,8 @@ entradas = ['if', 'else', 'while', 'for',
             'prompt(word)',
             'arreglo.concat(arreglo)'
             'var variable=4',
-            '5++']
+            '5++',
+            '\n']
 
 analizadorP1 = lex.lex()
 for i in entradas:
@@ -291,6 +292,7 @@ ejercicio = ['if (5>3) {}',## Ejemplo con if ##
              'cadena = "string soy"', ## Ejemplo con string ##
              'bool =  true ', ## Ejemplo con booleando ##
              'palabra = "soy una palabra "', ## Ejemplo con palabra ##
+             'llaves = {}', ## Ejemplos con lllave y rllave
              'llaves = {}', ## Ejemplos con lllave y rllave
              'nombre = "Christian";', ##Ejemplo con punto y coma ##
              'i ++', ## Ejemplo con ascender ##
