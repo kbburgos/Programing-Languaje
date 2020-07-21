@@ -84,7 +84,7 @@ def p_charAt(p):
 
 
 def p_push(p):
-    'push : factor PUSH LPAREN factor RPAREN'
+    '''push : factor PUSH LPAREN factor RPAREN'''
     p[0] = ('PUSH')
 
 
@@ -109,17 +109,21 @@ def p_instruccion(p):
 
 
 def p_then(p):
-    'then : LLLAVES sentencias RLLAVES'
+    '''then : LLLAVES sentencias RLLAVES'''
+
 
 
 def p_asignacion(p):
-    'asignacion : PALABRA ASIGNACION expresion'
+    '''asignacion : VAR PALABRA ASIGNACION sentencias
+    | PALABRA ASIGNACION sentencias'''
     p[0] = ('ASIGNACION')
+
 
 
 def p_expresion_suma(p):
     'expresion : term MAS factor'
     p[0] = p[1] + p[3]
+
 
 
 def p_expresion_resta(p):
@@ -227,26 +231,26 @@ def p_factor_objeto (p):
 
 def p_error(p):
     if p:
-        print("Error de Sintaxis en token", p.type)
+        print("Error de Sintaxis en token", p.value)
         # Just discard the token and tell the parser it's okay.
-        print("Error en linea: ", line)
+        print("Error en linea: ", str(p.lineno))
         
         parser.errok()
     else:
-        print("Error de sintaxis en linea:",line)
+        print("Error de sintaxis en linea:", str(p.lineno))
         
         
 
 # Construir parser
 parser = sintaxis.yacc()
-#while True:
-   # try:
-       # s = input('<JS?> ')
-  #  except EOFError:
-       #break
-  #  if not s: continue
-   # result = parser.parse(s)
-   # print(result)
+while True:
+    try:
+        s = input('<JS?> ')
+    except EOFError:
+        break
+    if not s: continue
+    result = parser.parse(s)
+    print(result)
 
 
 

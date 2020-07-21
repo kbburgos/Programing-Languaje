@@ -153,7 +153,7 @@ def t_CHARTAT(t):
 
 
 def t_PUSH(t):
-    r'[\.]push'
+    r'.?[\.]push'
     t.type = reservadas.get(t.value, 'PUSH')
     return t
 
