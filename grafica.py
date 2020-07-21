@@ -2,6 +2,7 @@ import sys
 import ply.lex as lex
 from LexProyecto import *
 from YaccProyecto import *
+import YaccProyecto
 
 
 from PyQt5.QtWidgets import QApplication
@@ -89,6 +90,8 @@ def analisisS():
         
     result = parser.parse(s)
     resultado.appendPlainText(result)
+    resultado.appendPlainText(YaccProyecto.errorstr)
+
     print(result)
 
 

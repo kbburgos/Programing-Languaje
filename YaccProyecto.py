@@ -1,8 +1,8 @@
 import ply.yacc as sintaxis
 import LexProyecto
 tokens = LexProyecto.tokens
-line = 1
-
+errorstr = ""
+line = 0
 def p_sentencias(p):
     '''sentencias : asignacion
     | expresion
@@ -168,6 +168,7 @@ def p_condicion(p):
     | compuesta AND condicion
     | compuesta OR condicion
     | compuesta
+    | NEWLINE
     '''
 
 
@@ -224,16 +225,24 @@ def p_factor_objeto (p):
     'factor : OBJETO'
     p[0] = ('OBJETO')
 
+def t_NEWLINE(t):
+    r'\n'
+    line+= 1
+    return t
+
 
 def p_error(p):
     if p:
         print("Error de Sintaxis en token", p.type)
         # Just discard the token and tell the parser it's okay.
-        print("Error en linea: ", line)
+        print("Error en linea: " + str(line))
+        errorstr= "Error en linea: " + str(line)
+        
         
         parser.errok()
     else:
-        print("Error de sintaxis en linea:",line)
+        print("Error de sintaxis en linea:" + str(line))
+        errorstr= "Error en linea: " + str(line)
         
         
 

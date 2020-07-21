@@ -55,24 +55,25 @@ Rule 49    condicion -> factor DIFERENTE factor
 Rule 50    condicion -> compuesta AND condicion
 Rule 51    condicion -> compuesta OR condicion
 Rule 52    condicion -> compuesta
-Rule 53    compuesta -> LPAREN condicion RPAREN
-Rule 54    term -> factor
-Rule 55    factor -> NEW SET LPAREN LISTA RPAREN
-Rule 56    factor -> NUMERO
-Rule 57    factor -> FLOTANTE
-Rule 58    factor -> PALABRA
-Rule 59    factor -> STRING
-Rule 60    factor -> LPAREN expresion RPAREN
-Rule 61    factor -> LISTA
-Rule 62    factor -> BOOLEANO
-Rule 63    factor -> OBJETO
+Rule 53    condicion -> NEWLINE
+Rule 54    compuesta -> LPAREN condicion RPAREN
+Rule 55    term -> factor
+Rule 56    factor -> NEW SET LPAREN LISTA RPAREN
+Rule 57    factor -> NUMERO
+Rule 58    factor -> FLOTANTE
+Rule 59    factor -> PALABRA
+Rule 60    factor -> STRING
+Rule 61    factor -> LPAREN expresion RPAREN
+Rule 62    factor -> LISTA
+Rule 63    factor -> BOOLEANO
+Rule 64    factor -> OBJETO
 
 Terminals, with rules where they appear
 
 AND                  : 50
 ASCENDER             : 32
 ASIGNACION           : 35 47
-BOOLEANO             : 62
+BOOLEANO             : 63
 CHARTAT              : 27
 COMA                 : 29
 CONCAT               : 31
@@ -81,26 +82,26 @@ DESCENDER            : 33
 DIFERENTE            : 49
 DIVISION             : 40
 ELSE                 : 21
-FLOTANTE             : 57
+FLOTANTE             : 58
 FOR                  : 23
 IF                   : 19 20
 IGUAL                : 44
 INCLUDE              : 25
-LISTA                : 24 55 61
+LISTA                : 24 56 62
 LLLAVES              : 34
 LOG                  : 18
-LPAREN               : 17 18 19 20 22 23 25 27 28 29 31 53 55 60
+LPAREN               : 17 18 19 20 22 23 25 27 28 29 31 54 56 61
 MAS                  : 36
 MAYOR                : 42 45
 MENOR                : 43 46
 MENOS                : 37
-NEW                  : 55
-NEWLINE              : 4
+NEW                  : 56
+NEWLINE              : 4 53
 NOT                  : 48
-NUMERO               : 56
-OBJETO               : 63
+NUMERO               : 57
+OBJETO               : 64
 OR                   : 51
-PALABRA              : 35 58
+PALABRA              : 35 59
 POP                  : 30
 POTENCIA             : 41
 PRODUCTO             : 39
@@ -109,11 +110,11 @@ PUNTO                : 18
 PUNTOCOMA            : 23 23
 PUSH                 : 28
 RLLAVES              : 34
-RPAREN               : 17 18 19 20 22 23 25 27 28 29 31 53 55 60
-SET                  : 55
+RPAREN               : 17 18 19 20 22 23 25 27 28 29 31 54 56 61
+SET                  : 56
 SLICE                : 29
 SORT                 : 24
-STRING               : 59
+STRING               : 60
 VALUEOF              : 26
 VAR                  : 23
 WHILE                : 22
@@ -125,10 +126,10 @@ asignacion           : 1
 chartAt              : 11
 compuesta            : 50 51 52
 concat               : 15
-condicion            : 19 20 22 23 23 50 51 53
+condicion            : 19 20 22 23 23 50 51 54
 else                 : 20
-expresion            : 2 35 39 40 41 60
-factor               : 17 18 25 25 26 27 27 28 28 29 29 29 30 31 31 32 33 36 37 42 43 44 44 45 45 46 46 47 47 48 49 49 54
+expresion            : 2 35 39 40 41 61
+factor               : 17 18 25 25 26 27 27 28 28 29 29 29 30 31 31 32 33 36 37 42 43 44 44 45 45 46 46 47 47 48 49 49 55
 for                  : 7
 if                   : 5
 imprimir             : 16
@@ -187,18 +188,18 @@ state 0
     (29) slice -> . factor SLICE LPAREN factor COMA factor RPAREN
     (30) pop -> . factor POP
     (31) concat -> . factor CONCAT LPAREN factor RPAREN
-    (54) term -> . factor
+    (55) term -> . factor
     (17) imprimir -> . PROMPT LPAREN factor RPAREN
     (18) imprimir -> . CONSOLE PUNTO LOG LPAREN factor RPAREN
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEWLINE         shift and go to state 5
     PALABRA         shift and go to state 17
@@ -370,25 +371,25 @@ state 16
 state 17
 
     (35) asignacion -> PALABRA . ASIGNACION expresion
-    (58) factor -> PALABRA .
+    (59) factor -> PALABRA .
 
     ASIGNACION      shift and go to state 37
-    INCLUDE         reduce using rule 58 (factor -> PALABRA .)
-    VALUEOF         reduce using rule 58 (factor -> PALABRA .)
-    CHARTAT         reduce using rule 58 (factor -> PALABRA .)
-    PUSH            reduce using rule 58 (factor -> PALABRA .)
-    SLICE           reduce using rule 58 (factor -> PALABRA .)
-    POP             reduce using rule 58 (factor -> PALABRA .)
-    CONCAT          reduce using rule 58 (factor -> PALABRA .)
-    MAS             reduce using rule 58 (factor -> PALABRA .)
-    MENOS           reduce using rule 58 (factor -> PALABRA .)
-    MAYOR           reduce using rule 58 (factor -> PALABRA .)
-    MENOR           reduce using rule 58 (factor -> PALABRA .)
-    PRODUCTO        reduce using rule 58 (factor -> PALABRA .)
-    DIVISION        reduce using rule 58 (factor -> PALABRA .)
-    POTENCIA        reduce using rule 58 (factor -> PALABRA .)
-    $end            reduce using rule 58 (factor -> PALABRA .)
-    RLLAVES         reduce using rule 58 (factor -> PALABRA .)
+    INCLUDE         reduce using rule 59 (factor -> PALABRA .)
+    VALUEOF         reduce using rule 59 (factor -> PALABRA .)
+    CHARTAT         reduce using rule 59 (factor -> PALABRA .)
+    PUSH            reduce using rule 59 (factor -> PALABRA .)
+    SLICE           reduce using rule 59 (factor -> PALABRA .)
+    POP             reduce using rule 59 (factor -> PALABRA .)
+    CONCAT          reduce using rule 59 (factor -> PALABRA .)
+    MAS             reduce using rule 59 (factor -> PALABRA .)
+    MENOS           reduce using rule 59 (factor -> PALABRA .)
+    MAYOR           reduce using rule 59 (factor -> PALABRA .)
+    MENOR           reduce using rule 59 (factor -> PALABRA .)
+    PRODUCTO        reduce using rule 59 (factor -> PALABRA .)
+    DIVISION        reduce using rule 59 (factor -> PALABRA .)
+    POTENCIA        reduce using rule 59 (factor -> PALABRA .)
+    $end            reduce using rule 59 (factor -> PALABRA .)
+    RLLAVES         reduce using rule 59 (factor -> PALABRA .)
 
 
 state 18
@@ -420,7 +421,7 @@ state 19
     (29) slice -> factor . SLICE LPAREN factor COMA factor RPAREN
     (30) pop -> factor . POP
     (31) concat -> factor . CONCAT LPAREN factor RPAREN
-    (54) term -> factor .
+    (55) term -> factor .
 
     INCLUDE         shift and go to state 42
     VALUEOF         shift and go to state 43
@@ -429,15 +430,15 @@ state 19
     SLICE           shift and go to state 46
     POP             shift and go to state 47
     CONCAT          shift and go to state 48
-    MAS             reduce using rule 54 (term -> factor .)
-    MENOS           reduce using rule 54 (term -> factor .)
-    MAYOR           reduce using rule 54 (term -> factor .)
-    MENOR           reduce using rule 54 (term -> factor .)
-    PRODUCTO        reduce using rule 54 (term -> factor .)
-    DIVISION        reduce using rule 54 (term -> factor .)
-    POTENCIA        reduce using rule 54 (term -> factor .)
-    $end            reduce using rule 54 (term -> factor .)
-    RLLAVES         reduce using rule 54 (term -> factor .)
+    MAS             reduce using rule 55 (term -> factor .)
+    MENOS           reduce using rule 55 (term -> factor .)
+    MAYOR           reduce using rule 55 (term -> factor .)
+    MENOR           reduce using rule 55 (term -> factor .)
+    PRODUCTO        reduce using rule 55 (term -> factor .)
+    DIVISION        reduce using rule 55 (term -> factor .)
+    POTENCIA        reduce using rule 55 (term -> factor .)
+    $end            reduce using rule 55 (term -> factor .)
+    RLLAVES         reduce using rule 55 (term -> factor .)
 
 
 state 20
@@ -458,7 +459,7 @@ state 21
 
 state 22
 
-    (60) factor -> LPAREN . expresion RPAREN
+    (61) factor -> LPAREN . expresion RPAREN
     (36) expresion -> . term MAS factor
     (37) expresion -> . term MENOS factor
     (38) expresion -> . term
@@ -467,16 +468,16 @@ state 22
     (41) expresion -> . expresion POTENCIA term
     (42) expresion -> . term MAYOR factor
     (43) expresion -> . term MENOR factor
-    (54) term -> . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (55) term -> . factor
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -509,25 +510,25 @@ state 24
 state 25
 
     (24) sort -> LISTA . SORT
-    (61) factor -> LISTA .
+    (62) factor -> LISTA .
 
     SORT            shift and go to state 56
-    INCLUDE         reduce using rule 61 (factor -> LISTA .)
-    VALUEOF         reduce using rule 61 (factor -> LISTA .)
-    CHARTAT         reduce using rule 61 (factor -> LISTA .)
-    PUSH            reduce using rule 61 (factor -> LISTA .)
-    SLICE           reduce using rule 61 (factor -> LISTA .)
-    POP             reduce using rule 61 (factor -> LISTA .)
-    CONCAT          reduce using rule 61 (factor -> LISTA .)
-    MAS             reduce using rule 61 (factor -> LISTA .)
-    MENOS           reduce using rule 61 (factor -> LISTA .)
-    MAYOR           reduce using rule 61 (factor -> LISTA .)
-    MENOR           reduce using rule 61 (factor -> LISTA .)
-    PRODUCTO        reduce using rule 61 (factor -> LISTA .)
-    DIVISION        reduce using rule 61 (factor -> LISTA .)
-    POTENCIA        reduce using rule 61 (factor -> LISTA .)
-    $end            reduce using rule 61 (factor -> LISTA .)
-    RLLAVES         reduce using rule 61 (factor -> LISTA .)
+    INCLUDE         reduce using rule 62 (factor -> LISTA .)
+    VALUEOF         reduce using rule 62 (factor -> LISTA .)
+    CHARTAT         reduce using rule 62 (factor -> LISTA .)
+    PUSH            reduce using rule 62 (factor -> LISTA .)
+    SLICE           reduce using rule 62 (factor -> LISTA .)
+    POP             reduce using rule 62 (factor -> LISTA .)
+    CONCAT          reduce using rule 62 (factor -> LISTA .)
+    MAS             reduce using rule 62 (factor -> LISTA .)
+    MENOS           reduce using rule 62 (factor -> LISTA .)
+    MAYOR           reduce using rule 62 (factor -> LISTA .)
+    MENOR           reduce using rule 62 (factor -> LISTA .)
+    PRODUCTO        reduce using rule 62 (factor -> LISTA .)
+    DIVISION        reduce using rule 62 (factor -> LISTA .)
+    POTENCIA        reduce using rule 62 (factor -> LISTA .)
+    $end            reduce using rule 62 (factor -> LISTA .)
+    RLLAVES         reduce using rule 62 (factor -> LISTA .)
 
 
 state 26
@@ -546,174 +547,174 @@ state 27
 
 state 28
 
-    (55) factor -> NEW . SET LPAREN LISTA RPAREN
+    (56) factor -> NEW . SET LPAREN LISTA RPAREN
 
     SET             shift and go to state 59
 
 
 state 29
 
-    (56) factor -> NUMERO .
+    (57) factor -> NUMERO .
 
-    INCLUDE         reduce using rule 56 (factor -> NUMERO .)
-    VALUEOF         reduce using rule 56 (factor -> NUMERO .)
-    CHARTAT         reduce using rule 56 (factor -> NUMERO .)
-    PUSH            reduce using rule 56 (factor -> NUMERO .)
-    SLICE           reduce using rule 56 (factor -> NUMERO .)
-    POP             reduce using rule 56 (factor -> NUMERO .)
-    CONCAT          reduce using rule 56 (factor -> NUMERO .)
-    MAS             reduce using rule 56 (factor -> NUMERO .)
-    MENOS           reduce using rule 56 (factor -> NUMERO .)
-    MAYOR           reduce using rule 56 (factor -> NUMERO .)
-    MENOR           reduce using rule 56 (factor -> NUMERO .)
-    PRODUCTO        reduce using rule 56 (factor -> NUMERO .)
-    DIVISION        reduce using rule 56 (factor -> NUMERO .)
-    POTENCIA        reduce using rule 56 (factor -> NUMERO .)
-    $end            reduce using rule 56 (factor -> NUMERO .)
-    RPAREN          reduce using rule 56 (factor -> NUMERO .)
-    RLLAVES         reduce using rule 56 (factor -> NUMERO .)
-    IGUAL           reduce using rule 56 (factor -> NUMERO .)
-    ASIGNACION      reduce using rule 56 (factor -> NUMERO .)
-    DIFERENTE       reduce using rule 56 (factor -> NUMERO .)
-    COMA            reduce using rule 56 (factor -> NUMERO .)
-    PUNTOCOMA       reduce using rule 56 (factor -> NUMERO .)
-    ASCENDER        reduce using rule 56 (factor -> NUMERO .)
-    DESCENDER       reduce using rule 56 (factor -> NUMERO .)
+    INCLUDE         reduce using rule 57 (factor -> NUMERO .)
+    VALUEOF         reduce using rule 57 (factor -> NUMERO .)
+    CHARTAT         reduce using rule 57 (factor -> NUMERO .)
+    PUSH            reduce using rule 57 (factor -> NUMERO .)
+    SLICE           reduce using rule 57 (factor -> NUMERO .)
+    POP             reduce using rule 57 (factor -> NUMERO .)
+    CONCAT          reduce using rule 57 (factor -> NUMERO .)
+    MAS             reduce using rule 57 (factor -> NUMERO .)
+    MENOS           reduce using rule 57 (factor -> NUMERO .)
+    MAYOR           reduce using rule 57 (factor -> NUMERO .)
+    MENOR           reduce using rule 57 (factor -> NUMERO .)
+    PRODUCTO        reduce using rule 57 (factor -> NUMERO .)
+    DIVISION        reduce using rule 57 (factor -> NUMERO .)
+    POTENCIA        reduce using rule 57 (factor -> NUMERO .)
+    $end            reduce using rule 57 (factor -> NUMERO .)
+    RPAREN          reduce using rule 57 (factor -> NUMERO .)
+    RLLAVES         reduce using rule 57 (factor -> NUMERO .)
+    IGUAL           reduce using rule 57 (factor -> NUMERO .)
+    ASIGNACION      reduce using rule 57 (factor -> NUMERO .)
+    DIFERENTE       reduce using rule 57 (factor -> NUMERO .)
+    COMA            reduce using rule 57 (factor -> NUMERO .)
+    PUNTOCOMA       reduce using rule 57 (factor -> NUMERO .)
+    ASCENDER        reduce using rule 57 (factor -> NUMERO .)
+    DESCENDER       reduce using rule 57 (factor -> NUMERO .)
 
 
 state 30
 
-    (57) factor -> FLOTANTE .
+    (58) factor -> FLOTANTE .
 
-    INCLUDE         reduce using rule 57 (factor -> FLOTANTE .)
-    VALUEOF         reduce using rule 57 (factor -> FLOTANTE .)
-    CHARTAT         reduce using rule 57 (factor -> FLOTANTE .)
-    PUSH            reduce using rule 57 (factor -> FLOTANTE .)
-    SLICE           reduce using rule 57 (factor -> FLOTANTE .)
-    POP             reduce using rule 57 (factor -> FLOTANTE .)
-    CONCAT          reduce using rule 57 (factor -> FLOTANTE .)
-    MAS             reduce using rule 57 (factor -> FLOTANTE .)
-    MENOS           reduce using rule 57 (factor -> FLOTANTE .)
-    MAYOR           reduce using rule 57 (factor -> FLOTANTE .)
-    MENOR           reduce using rule 57 (factor -> FLOTANTE .)
-    PRODUCTO        reduce using rule 57 (factor -> FLOTANTE .)
-    DIVISION        reduce using rule 57 (factor -> FLOTANTE .)
-    POTENCIA        reduce using rule 57 (factor -> FLOTANTE .)
-    $end            reduce using rule 57 (factor -> FLOTANTE .)
-    RPAREN          reduce using rule 57 (factor -> FLOTANTE .)
-    RLLAVES         reduce using rule 57 (factor -> FLOTANTE .)
-    IGUAL           reduce using rule 57 (factor -> FLOTANTE .)
-    ASIGNACION      reduce using rule 57 (factor -> FLOTANTE .)
-    DIFERENTE       reduce using rule 57 (factor -> FLOTANTE .)
-    COMA            reduce using rule 57 (factor -> FLOTANTE .)
-    PUNTOCOMA       reduce using rule 57 (factor -> FLOTANTE .)
-    ASCENDER        reduce using rule 57 (factor -> FLOTANTE .)
-    DESCENDER       reduce using rule 57 (factor -> FLOTANTE .)
+    INCLUDE         reduce using rule 58 (factor -> FLOTANTE .)
+    VALUEOF         reduce using rule 58 (factor -> FLOTANTE .)
+    CHARTAT         reduce using rule 58 (factor -> FLOTANTE .)
+    PUSH            reduce using rule 58 (factor -> FLOTANTE .)
+    SLICE           reduce using rule 58 (factor -> FLOTANTE .)
+    POP             reduce using rule 58 (factor -> FLOTANTE .)
+    CONCAT          reduce using rule 58 (factor -> FLOTANTE .)
+    MAS             reduce using rule 58 (factor -> FLOTANTE .)
+    MENOS           reduce using rule 58 (factor -> FLOTANTE .)
+    MAYOR           reduce using rule 58 (factor -> FLOTANTE .)
+    MENOR           reduce using rule 58 (factor -> FLOTANTE .)
+    PRODUCTO        reduce using rule 58 (factor -> FLOTANTE .)
+    DIVISION        reduce using rule 58 (factor -> FLOTANTE .)
+    POTENCIA        reduce using rule 58 (factor -> FLOTANTE .)
+    $end            reduce using rule 58 (factor -> FLOTANTE .)
+    RPAREN          reduce using rule 58 (factor -> FLOTANTE .)
+    RLLAVES         reduce using rule 58 (factor -> FLOTANTE .)
+    IGUAL           reduce using rule 58 (factor -> FLOTANTE .)
+    ASIGNACION      reduce using rule 58 (factor -> FLOTANTE .)
+    DIFERENTE       reduce using rule 58 (factor -> FLOTANTE .)
+    COMA            reduce using rule 58 (factor -> FLOTANTE .)
+    PUNTOCOMA       reduce using rule 58 (factor -> FLOTANTE .)
+    ASCENDER        reduce using rule 58 (factor -> FLOTANTE .)
+    DESCENDER       reduce using rule 58 (factor -> FLOTANTE .)
 
 
 state 31
 
-    (59) factor -> STRING .
+    (60) factor -> STRING .
 
-    INCLUDE         reduce using rule 59 (factor -> STRING .)
-    VALUEOF         reduce using rule 59 (factor -> STRING .)
-    CHARTAT         reduce using rule 59 (factor -> STRING .)
-    PUSH            reduce using rule 59 (factor -> STRING .)
-    SLICE           reduce using rule 59 (factor -> STRING .)
-    POP             reduce using rule 59 (factor -> STRING .)
-    CONCAT          reduce using rule 59 (factor -> STRING .)
-    MAS             reduce using rule 59 (factor -> STRING .)
-    MENOS           reduce using rule 59 (factor -> STRING .)
-    MAYOR           reduce using rule 59 (factor -> STRING .)
-    MENOR           reduce using rule 59 (factor -> STRING .)
-    PRODUCTO        reduce using rule 59 (factor -> STRING .)
-    DIVISION        reduce using rule 59 (factor -> STRING .)
-    POTENCIA        reduce using rule 59 (factor -> STRING .)
-    $end            reduce using rule 59 (factor -> STRING .)
-    RPAREN          reduce using rule 59 (factor -> STRING .)
-    RLLAVES         reduce using rule 59 (factor -> STRING .)
-    IGUAL           reduce using rule 59 (factor -> STRING .)
-    ASIGNACION      reduce using rule 59 (factor -> STRING .)
-    DIFERENTE       reduce using rule 59 (factor -> STRING .)
-    COMA            reduce using rule 59 (factor -> STRING .)
-    PUNTOCOMA       reduce using rule 59 (factor -> STRING .)
-    ASCENDER        reduce using rule 59 (factor -> STRING .)
-    DESCENDER       reduce using rule 59 (factor -> STRING .)
+    INCLUDE         reduce using rule 60 (factor -> STRING .)
+    VALUEOF         reduce using rule 60 (factor -> STRING .)
+    CHARTAT         reduce using rule 60 (factor -> STRING .)
+    PUSH            reduce using rule 60 (factor -> STRING .)
+    SLICE           reduce using rule 60 (factor -> STRING .)
+    POP             reduce using rule 60 (factor -> STRING .)
+    CONCAT          reduce using rule 60 (factor -> STRING .)
+    MAS             reduce using rule 60 (factor -> STRING .)
+    MENOS           reduce using rule 60 (factor -> STRING .)
+    MAYOR           reduce using rule 60 (factor -> STRING .)
+    MENOR           reduce using rule 60 (factor -> STRING .)
+    PRODUCTO        reduce using rule 60 (factor -> STRING .)
+    DIVISION        reduce using rule 60 (factor -> STRING .)
+    POTENCIA        reduce using rule 60 (factor -> STRING .)
+    $end            reduce using rule 60 (factor -> STRING .)
+    RPAREN          reduce using rule 60 (factor -> STRING .)
+    RLLAVES         reduce using rule 60 (factor -> STRING .)
+    IGUAL           reduce using rule 60 (factor -> STRING .)
+    ASIGNACION      reduce using rule 60 (factor -> STRING .)
+    DIFERENTE       reduce using rule 60 (factor -> STRING .)
+    COMA            reduce using rule 60 (factor -> STRING .)
+    PUNTOCOMA       reduce using rule 60 (factor -> STRING .)
+    ASCENDER        reduce using rule 60 (factor -> STRING .)
+    DESCENDER       reduce using rule 60 (factor -> STRING .)
 
 
 state 32
 
-    (62) factor -> BOOLEANO .
+    (63) factor -> BOOLEANO .
 
-    INCLUDE         reduce using rule 62 (factor -> BOOLEANO .)
-    VALUEOF         reduce using rule 62 (factor -> BOOLEANO .)
-    CHARTAT         reduce using rule 62 (factor -> BOOLEANO .)
-    PUSH            reduce using rule 62 (factor -> BOOLEANO .)
-    SLICE           reduce using rule 62 (factor -> BOOLEANO .)
-    POP             reduce using rule 62 (factor -> BOOLEANO .)
-    CONCAT          reduce using rule 62 (factor -> BOOLEANO .)
-    MAS             reduce using rule 62 (factor -> BOOLEANO .)
-    MENOS           reduce using rule 62 (factor -> BOOLEANO .)
-    MAYOR           reduce using rule 62 (factor -> BOOLEANO .)
-    MENOR           reduce using rule 62 (factor -> BOOLEANO .)
-    PRODUCTO        reduce using rule 62 (factor -> BOOLEANO .)
-    DIVISION        reduce using rule 62 (factor -> BOOLEANO .)
-    POTENCIA        reduce using rule 62 (factor -> BOOLEANO .)
-    $end            reduce using rule 62 (factor -> BOOLEANO .)
-    RPAREN          reduce using rule 62 (factor -> BOOLEANO .)
-    RLLAVES         reduce using rule 62 (factor -> BOOLEANO .)
-    IGUAL           reduce using rule 62 (factor -> BOOLEANO .)
-    ASIGNACION      reduce using rule 62 (factor -> BOOLEANO .)
-    DIFERENTE       reduce using rule 62 (factor -> BOOLEANO .)
-    COMA            reduce using rule 62 (factor -> BOOLEANO .)
-    PUNTOCOMA       reduce using rule 62 (factor -> BOOLEANO .)
-    ASCENDER        reduce using rule 62 (factor -> BOOLEANO .)
-    DESCENDER       reduce using rule 62 (factor -> BOOLEANO .)
+    INCLUDE         reduce using rule 63 (factor -> BOOLEANO .)
+    VALUEOF         reduce using rule 63 (factor -> BOOLEANO .)
+    CHARTAT         reduce using rule 63 (factor -> BOOLEANO .)
+    PUSH            reduce using rule 63 (factor -> BOOLEANO .)
+    SLICE           reduce using rule 63 (factor -> BOOLEANO .)
+    POP             reduce using rule 63 (factor -> BOOLEANO .)
+    CONCAT          reduce using rule 63 (factor -> BOOLEANO .)
+    MAS             reduce using rule 63 (factor -> BOOLEANO .)
+    MENOS           reduce using rule 63 (factor -> BOOLEANO .)
+    MAYOR           reduce using rule 63 (factor -> BOOLEANO .)
+    MENOR           reduce using rule 63 (factor -> BOOLEANO .)
+    PRODUCTO        reduce using rule 63 (factor -> BOOLEANO .)
+    DIVISION        reduce using rule 63 (factor -> BOOLEANO .)
+    POTENCIA        reduce using rule 63 (factor -> BOOLEANO .)
+    $end            reduce using rule 63 (factor -> BOOLEANO .)
+    RPAREN          reduce using rule 63 (factor -> BOOLEANO .)
+    RLLAVES         reduce using rule 63 (factor -> BOOLEANO .)
+    IGUAL           reduce using rule 63 (factor -> BOOLEANO .)
+    ASIGNACION      reduce using rule 63 (factor -> BOOLEANO .)
+    DIFERENTE       reduce using rule 63 (factor -> BOOLEANO .)
+    COMA            reduce using rule 63 (factor -> BOOLEANO .)
+    PUNTOCOMA       reduce using rule 63 (factor -> BOOLEANO .)
+    ASCENDER        reduce using rule 63 (factor -> BOOLEANO .)
+    DESCENDER       reduce using rule 63 (factor -> BOOLEANO .)
 
 
 state 33
 
-    (63) factor -> OBJETO .
+    (64) factor -> OBJETO .
 
-    INCLUDE         reduce using rule 63 (factor -> OBJETO .)
-    VALUEOF         reduce using rule 63 (factor -> OBJETO .)
-    CHARTAT         reduce using rule 63 (factor -> OBJETO .)
-    PUSH            reduce using rule 63 (factor -> OBJETO .)
-    SLICE           reduce using rule 63 (factor -> OBJETO .)
-    POP             reduce using rule 63 (factor -> OBJETO .)
-    CONCAT          reduce using rule 63 (factor -> OBJETO .)
-    MAS             reduce using rule 63 (factor -> OBJETO .)
-    MENOS           reduce using rule 63 (factor -> OBJETO .)
-    MAYOR           reduce using rule 63 (factor -> OBJETO .)
-    MENOR           reduce using rule 63 (factor -> OBJETO .)
-    PRODUCTO        reduce using rule 63 (factor -> OBJETO .)
-    DIVISION        reduce using rule 63 (factor -> OBJETO .)
-    POTENCIA        reduce using rule 63 (factor -> OBJETO .)
-    $end            reduce using rule 63 (factor -> OBJETO .)
-    RPAREN          reduce using rule 63 (factor -> OBJETO .)
-    RLLAVES         reduce using rule 63 (factor -> OBJETO .)
-    IGUAL           reduce using rule 63 (factor -> OBJETO .)
-    ASIGNACION      reduce using rule 63 (factor -> OBJETO .)
-    DIFERENTE       reduce using rule 63 (factor -> OBJETO .)
-    COMA            reduce using rule 63 (factor -> OBJETO .)
-    PUNTOCOMA       reduce using rule 63 (factor -> OBJETO .)
-    ASCENDER        reduce using rule 63 (factor -> OBJETO .)
-    DESCENDER       reduce using rule 63 (factor -> OBJETO .)
+    INCLUDE         reduce using rule 64 (factor -> OBJETO .)
+    VALUEOF         reduce using rule 64 (factor -> OBJETO .)
+    CHARTAT         reduce using rule 64 (factor -> OBJETO .)
+    PUSH            reduce using rule 64 (factor -> OBJETO .)
+    SLICE           reduce using rule 64 (factor -> OBJETO .)
+    POP             reduce using rule 64 (factor -> OBJETO .)
+    CONCAT          reduce using rule 64 (factor -> OBJETO .)
+    MAS             reduce using rule 64 (factor -> OBJETO .)
+    MENOS           reduce using rule 64 (factor -> OBJETO .)
+    MAYOR           reduce using rule 64 (factor -> OBJETO .)
+    MENOR           reduce using rule 64 (factor -> OBJETO .)
+    PRODUCTO        reduce using rule 64 (factor -> OBJETO .)
+    DIVISION        reduce using rule 64 (factor -> OBJETO .)
+    POTENCIA        reduce using rule 64 (factor -> OBJETO .)
+    $end            reduce using rule 64 (factor -> OBJETO .)
+    RPAREN          reduce using rule 64 (factor -> OBJETO .)
+    RLLAVES         reduce using rule 64 (factor -> OBJETO .)
+    IGUAL           reduce using rule 64 (factor -> OBJETO .)
+    ASIGNACION      reduce using rule 64 (factor -> OBJETO .)
+    DIFERENTE       reduce using rule 64 (factor -> OBJETO .)
+    COMA            reduce using rule 64 (factor -> OBJETO .)
+    PUNTOCOMA       reduce using rule 64 (factor -> OBJETO .)
+    ASCENDER        reduce using rule 64 (factor -> OBJETO .)
+    DESCENDER       reduce using rule 64 (factor -> OBJETO .)
 
 
 state 34
 
     (39) expresion -> expresion PRODUCTO . term
-    (54) term -> . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (55) term -> . factor
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -731,16 +732,16 @@ state 34
 state 35
 
     (40) expresion -> expresion DIVISION . term
-    (54) term -> . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (55) term -> . factor
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -758,16 +759,16 @@ state 35
 state 36
 
     (41) expresion -> expresion POTENCIA . term
-    (54) term -> . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (55) term -> . factor
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -793,16 +794,16 @@ state 37
     (41) expresion -> . expresion POTENCIA term
     (42) expresion -> . term MAYOR factor
     (43) expresion -> . term MENOR factor
-    (54) term -> . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (55) term -> . factor
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -821,15 +822,15 @@ state 37
 state 38
 
     (36) expresion -> term MAS . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -846,15 +847,15 @@ state 38
 state 39
 
     (37) expresion -> term MENOS . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -871,15 +872,15 @@ state 39
 state 40
 
     (42) expresion -> term MAYOR . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -896,15 +897,15 @@ state 40
 state 41
 
     (43) expresion -> term MENOR . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -982,18 +983,20 @@ state 49
     (50) condicion -> . compuesta AND condicion
     (51) condicion -> . compuesta OR condicion
     (52) condicion -> . compuesta
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
-    (53) compuesta -> . LPAREN condicion RPAREN
+    (53) condicion -> . NEWLINE
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
+    (54) compuesta -> . LPAREN condicion RPAREN
 
     NOT             shift and go to state 76
+    NEWLINE         shift and go to state 78
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
     FLOTANTE        shift and go to state 30
@@ -1010,12 +1013,12 @@ state 49
 
 state 50
 
-    (60) factor -> LPAREN expresion . RPAREN
+    (61) factor -> LPAREN expresion . RPAREN
     (39) expresion -> expresion . PRODUCTO term
     (40) expresion -> expresion . DIVISION term
     (41) expresion -> expresion . POTENCIA term
 
-    RPAREN          shift and go to state 78
+    RPAREN          shift and go to state 79
     PRODUCTO        shift and go to state 34
     DIVISION        shift and go to state 35
     POTENCIA        shift and go to state 36
@@ -1023,64 +1026,64 @@ state 50
 
 state 51
 
-    (54) term -> factor .
+    (55) term -> factor .
 
-    MAS             reduce using rule 54 (term -> factor .)
-    MENOS           reduce using rule 54 (term -> factor .)
-    MAYOR           reduce using rule 54 (term -> factor .)
-    MENOR           reduce using rule 54 (term -> factor .)
-    RPAREN          reduce using rule 54 (term -> factor .)
-    PRODUCTO        reduce using rule 54 (term -> factor .)
-    DIVISION        reduce using rule 54 (term -> factor .)
-    POTENCIA        reduce using rule 54 (term -> factor .)
-    $end            reduce using rule 54 (term -> factor .)
-    RLLAVES         reduce using rule 54 (term -> factor .)
+    MAS             reduce using rule 55 (term -> factor .)
+    MENOS           reduce using rule 55 (term -> factor .)
+    MAYOR           reduce using rule 55 (term -> factor .)
+    MENOR           reduce using rule 55 (term -> factor .)
+    RPAREN          reduce using rule 55 (term -> factor .)
+    PRODUCTO        reduce using rule 55 (term -> factor .)
+    DIVISION        reduce using rule 55 (term -> factor .)
+    POTENCIA        reduce using rule 55 (term -> factor .)
+    $end            reduce using rule 55 (term -> factor .)
+    RLLAVES         reduce using rule 55 (term -> factor .)
 
 
 state 52
 
-    (61) factor -> LISTA .
+    (62) factor -> LISTA .
 
-    MAS             reduce using rule 61 (factor -> LISTA .)
-    MENOS           reduce using rule 61 (factor -> LISTA .)
-    MAYOR           reduce using rule 61 (factor -> LISTA .)
-    MENOR           reduce using rule 61 (factor -> LISTA .)
-    RPAREN          reduce using rule 61 (factor -> LISTA .)
-    PRODUCTO        reduce using rule 61 (factor -> LISTA .)
-    DIVISION        reduce using rule 61 (factor -> LISTA .)
-    POTENCIA        reduce using rule 61 (factor -> LISTA .)
-    $end            reduce using rule 61 (factor -> LISTA .)
-    RLLAVES         reduce using rule 61 (factor -> LISTA .)
-    IGUAL           reduce using rule 61 (factor -> LISTA .)
-    ASIGNACION      reduce using rule 61 (factor -> LISTA .)
-    DIFERENTE       reduce using rule 61 (factor -> LISTA .)
-    COMA            reduce using rule 61 (factor -> LISTA .)
-    PUNTOCOMA       reduce using rule 61 (factor -> LISTA .)
-    ASCENDER        reduce using rule 61 (factor -> LISTA .)
-    DESCENDER       reduce using rule 61 (factor -> LISTA .)
+    MAS             reduce using rule 62 (factor -> LISTA .)
+    MENOS           reduce using rule 62 (factor -> LISTA .)
+    MAYOR           reduce using rule 62 (factor -> LISTA .)
+    MENOR           reduce using rule 62 (factor -> LISTA .)
+    RPAREN          reduce using rule 62 (factor -> LISTA .)
+    PRODUCTO        reduce using rule 62 (factor -> LISTA .)
+    DIVISION        reduce using rule 62 (factor -> LISTA .)
+    POTENCIA        reduce using rule 62 (factor -> LISTA .)
+    $end            reduce using rule 62 (factor -> LISTA .)
+    RLLAVES         reduce using rule 62 (factor -> LISTA .)
+    IGUAL           reduce using rule 62 (factor -> LISTA .)
+    ASIGNACION      reduce using rule 62 (factor -> LISTA .)
+    DIFERENTE       reduce using rule 62 (factor -> LISTA .)
+    COMA            reduce using rule 62 (factor -> LISTA .)
+    PUNTOCOMA       reduce using rule 62 (factor -> LISTA .)
+    ASCENDER        reduce using rule 62 (factor -> LISTA .)
+    DESCENDER       reduce using rule 62 (factor -> LISTA .)
 
 
 state 53
 
-    (58) factor -> PALABRA .
+    (59) factor -> PALABRA .
 
-    MAS             reduce using rule 58 (factor -> PALABRA .)
-    MENOS           reduce using rule 58 (factor -> PALABRA .)
-    MAYOR           reduce using rule 58 (factor -> PALABRA .)
-    MENOR           reduce using rule 58 (factor -> PALABRA .)
-    RPAREN          reduce using rule 58 (factor -> PALABRA .)
-    PRODUCTO        reduce using rule 58 (factor -> PALABRA .)
-    DIVISION        reduce using rule 58 (factor -> PALABRA .)
-    POTENCIA        reduce using rule 58 (factor -> PALABRA .)
-    $end            reduce using rule 58 (factor -> PALABRA .)
-    RLLAVES         reduce using rule 58 (factor -> PALABRA .)
-    IGUAL           reduce using rule 58 (factor -> PALABRA .)
-    ASIGNACION      reduce using rule 58 (factor -> PALABRA .)
-    DIFERENTE       reduce using rule 58 (factor -> PALABRA .)
-    COMA            reduce using rule 58 (factor -> PALABRA .)
-    PUNTOCOMA       reduce using rule 58 (factor -> PALABRA .)
-    ASCENDER        reduce using rule 58 (factor -> PALABRA .)
-    DESCENDER       reduce using rule 58 (factor -> PALABRA .)
+    MAS             reduce using rule 59 (factor -> PALABRA .)
+    MENOS           reduce using rule 59 (factor -> PALABRA .)
+    MAYOR           reduce using rule 59 (factor -> PALABRA .)
+    MENOR           reduce using rule 59 (factor -> PALABRA .)
+    RPAREN          reduce using rule 59 (factor -> PALABRA .)
+    PRODUCTO        reduce using rule 59 (factor -> PALABRA .)
+    DIVISION        reduce using rule 59 (factor -> PALABRA .)
+    POTENCIA        reduce using rule 59 (factor -> PALABRA .)
+    $end            reduce using rule 59 (factor -> PALABRA .)
+    RLLAVES         reduce using rule 59 (factor -> PALABRA .)
+    IGUAL           reduce using rule 59 (factor -> PALABRA .)
+    ASIGNACION      reduce using rule 59 (factor -> PALABRA .)
+    DIFERENTE       reduce using rule 59 (factor -> PALABRA .)
+    COMA            reduce using rule 59 (factor -> PALABRA .)
+    PUNTOCOMA       reduce using rule 59 (factor -> PALABRA .)
+    ASCENDER        reduce using rule 59 (factor -> PALABRA .)
+    DESCENDER       reduce using rule 59 (factor -> PALABRA .)
 
 
 state 54
@@ -1095,18 +1098,20 @@ state 54
     (50) condicion -> . compuesta AND condicion
     (51) condicion -> . compuesta OR condicion
     (52) condicion -> . compuesta
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
-    (53) compuesta -> . LPAREN condicion RPAREN
+    (53) condicion -> . NEWLINE
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
+    (54) compuesta -> . LPAREN condicion RPAREN
 
     NOT             shift and go to state 76
+    NEWLINE         shift and go to state 78
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
     FLOTANTE        shift and go to state 30
@@ -1117,7 +1122,7 @@ state 54
     BOOLEANO        shift and go to state 32
     OBJETO          shift and go to state 33
 
-    condicion                      shift and go to state 79
+    condicion                      shift and go to state 80
     factor                         shift and go to state 75
     compuesta                      shift and go to state 77
 
@@ -1125,7 +1130,7 @@ state 55
 
     (23) for -> FOR LPAREN . VAR condicion PUNTOCOMA condicion PUNTOCOMA instruccion RPAREN then
 
-    VAR             shift and go to state 80
+    VAR             shift and go to state 81
 
 
 state 56
@@ -1139,15 +1144,15 @@ state 56
 state 57
 
     (17) imprimir -> PROMPT LPAREN . factor RPAREN
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1159,20 +1164,20 @@ state 57
     BOOLEANO        shift and go to state 32
     OBJETO          shift and go to state 33
 
-    factor                         shift and go to state 81
+    factor                         shift and go to state 82
 
 state 58
 
     (18) imprimir -> CONSOLE PUNTO . LOG LPAREN factor RPAREN
 
-    LOG             shift and go to state 82
+    LOG             shift and go to state 83
 
 
 state 59
 
-    (55) factor -> NEW SET . LPAREN LISTA RPAREN
+    (56) factor -> NEW SET . LPAREN LISTA RPAREN
 
-    LPAREN          shift and go to state 83
+    LPAREN          shift and go to state 84
 
 
 state 60
@@ -1276,40 +1281,15 @@ state 67
 state 68
 
     (25) include -> factor INCLUDE LPAREN . factor RPAREN
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
-
-    NEW             shift and go to state 28
-    NUMERO          shift and go to state 29
-    FLOTANTE        shift and go to state 30
-    PALABRA         shift and go to state 53
-    STRING          shift and go to state 31
-    LPAREN          shift and go to state 22
-    LISTA           shift and go to state 52
-    BOOLEANO        shift and go to state 32
-    OBJETO          shift and go to state 33
-
-    factor                         shift and go to state 84
-
-state 69
-
-    (27) chartAt -> factor CHARTAT LPAREN . factor RPAREN
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1323,18 +1303,18 @@ state 69
 
     factor                         shift and go to state 85
 
-state 70
+state 69
 
-    (28) push -> factor PUSH LPAREN . factor RPAREN
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (27) chartAt -> factor CHARTAT LPAREN . factor RPAREN
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1348,18 +1328,18 @@ state 70
 
     factor                         shift and go to state 86
 
-state 71
+state 70
 
-    (29) slice -> factor SLICE LPAREN . factor COMA factor RPAREN
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (28) push -> factor PUSH LPAREN . factor RPAREN
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1373,18 +1353,18 @@ state 71
 
     factor                         shift and go to state 87
 
-state 72
+state 71
 
-    (31) concat -> factor CONCAT LPAREN . factor RPAREN
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (29) slice -> factor SLICE LPAREN . factor COMA factor RPAREN
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1398,10 +1378,35 @@ state 72
 
     factor                         shift and go to state 88
 
+state 72
+
+    (31) concat -> factor CONCAT LPAREN . factor RPAREN
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
+
+    NEW             shift and go to state 28
+    NUMERO          shift and go to state 29
+    FLOTANTE        shift and go to state 30
+    PALABRA         shift and go to state 53
+    STRING          shift and go to state 31
+    LPAREN          shift and go to state 22
+    LISTA           shift and go to state 52
+    BOOLEANO        shift and go to state 32
+    OBJETO          shift and go to state 33
+
+    factor                         shift and go to state 89
+
 state 73
 
-    (60) factor -> LPAREN . expresion RPAREN
-    (53) compuesta -> LPAREN . condicion RPAREN
+    (61) factor -> LPAREN . expresion RPAREN
+    (54) compuesta -> LPAREN . condicion RPAREN
     (36) expresion -> . term MAS factor
     (37) expresion -> . term MENOS factor
     (38) expresion -> . term
@@ -1419,19 +1424,21 @@ state 73
     (50) condicion -> . compuesta AND condicion
     (51) condicion -> . compuesta OR condicion
     (52) condicion -> . compuesta
-    (54) term -> . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
-    (53) compuesta -> . LPAREN condicion RPAREN
+    (53) condicion -> . NEWLINE
+    (55) term -> . factor
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
+    (54) compuesta -> . LPAREN condicion RPAREN
 
     NOT             shift and go to state 76
+    NEWLINE         shift and go to state 78
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
     FLOTANTE        shift and go to state 30
@@ -1443,9 +1450,9 @@ state 73
     OBJETO          shift and go to state 33
 
     expresion                      shift and go to state 50
-    condicion                      shift and go to state 89
+    condicion                      shift and go to state 90
     term                           shift and go to state 18
-    factor                         shift and go to state 90
+    factor                         shift and go to state 91
     compuesta                      shift and go to state 77
 
 state 74
@@ -1453,7 +1460,7 @@ state 74
     (19) if -> IF LPAREN condicion . RPAREN then
     (20) if -> IF LPAREN condicion . RPAREN then else
 
-    RPAREN          shift and go to state 91
+    RPAREN          shift and go to state 92
 
 
 state 75
@@ -1464,25 +1471,25 @@ state 75
     (47) condicion -> factor . ASIGNACION factor
     (49) condicion -> factor . DIFERENTE factor
 
-    IGUAL           shift and go to state 92
-    MAYOR           shift and go to state 93
-    MENOR           shift and go to state 94
-    ASIGNACION      shift and go to state 95
-    DIFERENTE       shift and go to state 96
+    IGUAL           shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    ASIGNACION      shift and go to state 96
+    DIFERENTE       shift and go to state 97
 
 
 state 76
 
     (48) condicion -> NOT . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1494,7 +1501,7 @@ state 76
     BOOLEANO        shift and go to state 32
     OBJETO          shift and go to state 33
 
-    factor                         shift and go to state 97
+    factor                         shift and go to state 98
 
 state 77
 
@@ -1502,50 +1509,58 @@ state 77
     (51) condicion -> compuesta . OR condicion
     (52) condicion -> compuesta .
 
-    AND             shift and go to state 98
-    OR              shift and go to state 99
+    AND             shift and go to state 99
+    OR              shift and go to state 100
     RPAREN          reduce using rule 52 (condicion -> compuesta .)
     PUNTOCOMA       reduce using rule 52 (condicion -> compuesta .)
 
 
 state 78
 
-    (60) factor -> LPAREN expresion RPAREN .
+    (53) condicion -> NEWLINE .
 
-    INCLUDE         reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    VALUEOF         reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    CHARTAT         reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    PUSH            reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    SLICE           reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    POP             reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    CONCAT          reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    MAS             reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    MENOS           reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    MAYOR           reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    MENOR           reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    PRODUCTO        reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    DIVISION        reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    POTENCIA        reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    $end            reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    RPAREN          reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    RLLAVES         reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    IGUAL           reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    ASIGNACION      reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    DIFERENTE       reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    COMA            reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    PUNTOCOMA       reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    ASCENDER        reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
-    DESCENDER       reduce using rule 60 (factor -> LPAREN expresion RPAREN .)
+    RPAREN          reduce using rule 53 (condicion -> NEWLINE .)
+    PUNTOCOMA       reduce using rule 53 (condicion -> NEWLINE .)
 
 
 state 79
 
-    (22) while -> WHILE LPAREN condicion . RPAREN then
+    (61) factor -> LPAREN expresion RPAREN .
 
-    RPAREN          shift and go to state 100
+    INCLUDE         reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    VALUEOF         reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    CHARTAT         reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    PUSH            reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    SLICE           reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    POP             reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    CONCAT          reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    MAS             reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    MENOS           reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    MAYOR           reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    MENOR           reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    PRODUCTO        reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    DIVISION        reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    POTENCIA        reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    $end            reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    RPAREN          reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    RLLAVES         reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    IGUAL           reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    ASIGNACION      reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    DIFERENTE       reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    COMA            reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    PUNTOCOMA       reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    ASCENDER        reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
+    DESCENDER       reduce using rule 61 (factor -> LPAREN expresion RPAREN .)
 
 
 state 80
+
+    (22) while -> WHILE LPAREN condicion . RPAREN then
+
+    RPAREN          shift and go to state 101
+
+
+state 81
 
     (23) for -> FOR LPAREN VAR . condicion PUNTOCOMA condicion PUNTOCOMA instruccion RPAREN then
     (44) condicion -> . factor IGUAL factor
@@ -1557,18 +1572,20 @@ state 80
     (50) condicion -> . compuesta AND condicion
     (51) condicion -> . compuesta OR condicion
     (52) condicion -> . compuesta
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
-    (53) compuesta -> . LPAREN condicion RPAREN
+    (53) condicion -> . NEWLINE
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
+    (54) compuesta -> . LPAREN condicion RPAREN
 
     NOT             shift and go to state 76
+    NEWLINE         shift and go to state 78
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
     FLOTANTE        shift and go to state 30
@@ -1579,147 +1596,122 @@ state 80
     BOOLEANO        shift and go to state 32
     OBJETO          shift and go to state 33
 
-    condicion                      shift and go to state 101
+    condicion                      shift and go to state 102
     factor                         shift and go to state 75
     compuesta                      shift and go to state 77
 
-state 81
+state 82
 
     (17) imprimir -> PROMPT LPAREN factor . RPAREN
 
-    RPAREN          shift and go to state 102
-
-
-state 82
-
-    (18) imprimir -> CONSOLE PUNTO LOG . LPAREN factor RPAREN
-
-    LPAREN          shift and go to state 103
+    RPAREN          shift and go to state 103
 
 
 state 83
 
-    (55) factor -> NEW SET LPAREN . LISTA RPAREN
+    (18) imprimir -> CONSOLE PUNTO LOG . LPAREN factor RPAREN
 
-    LISTA           shift and go to state 104
+    LPAREN          shift and go to state 104
 
 
 state 84
 
-    (25) include -> factor INCLUDE LPAREN factor . RPAREN
+    (56) factor -> NEW SET LPAREN . LISTA RPAREN
 
-    RPAREN          shift and go to state 105
+    LISTA           shift and go to state 105
 
 
 state 85
 
-    (27) chartAt -> factor CHARTAT LPAREN factor . RPAREN
+    (25) include -> factor INCLUDE LPAREN factor . RPAREN
 
     RPAREN          shift and go to state 106
 
 
 state 86
 
-    (28) push -> factor PUSH LPAREN factor . RPAREN
+    (27) chartAt -> factor CHARTAT LPAREN factor . RPAREN
 
     RPAREN          shift and go to state 107
 
 
 state 87
 
-    (29) slice -> factor SLICE LPAREN factor . COMA factor RPAREN
+    (28) push -> factor PUSH LPAREN factor . RPAREN
 
-    COMA            shift and go to state 108
+    RPAREN          shift and go to state 108
 
 
 state 88
 
-    (31) concat -> factor CONCAT LPAREN factor . RPAREN
+    (29) slice -> factor SLICE LPAREN factor . COMA factor RPAREN
 
-    RPAREN          shift and go to state 109
+    COMA            shift and go to state 109
 
 
 state 89
 
-    (53) compuesta -> LPAREN condicion . RPAREN
+    (31) concat -> factor CONCAT LPAREN factor . RPAREN
 
     RPAREN          shift and go to state 110
 
 
 state 90
 
+    (54) compuesta -> LPAREN condicion . RPAREN
+
+    RPAREN          shift and go to state 111
+
+
+state 91
+
     (44) condicion -> factor . IGUAL factor
     (45) condicion -> factor . MAYOR factor
     (46) condicion -> factor . MENOR factor
     (47) condicion -> factor . ASIGNACION factor
     (49) condicion -> factor . DIFERENTE factor
-    (54) term -> factor .
+    (55) term -> factor .
 
   ! shift/reduce conflict for MAYOR resolved as shift
   ! shift/reduce conflict for MENOR resolved as shift
-    IGUAL           shift and go to state 92
-    MAYOR           shift and go to state 93
-    MENOR           shift and go to state 94
-    ASIGNACION      shift and go to state 95
-    DIFERENTE       shift and go to state 96
-    MAS             reduce using rule 54 (term -> factor .)
-    MENOS           reduce using rule 54 (term -> factor .)
-    RPAREN          reduce using rule 54 (term -> factor .)
-    PRODUCTO        reduce using rule 54 (term -> factor .)
-    DIVISION        reduce using rule 54 (term -> factor .)
-    POTENCIA        reduce using rule 54 (term -> factor .)
+    IGUAL           shift and go to state 93
+    MAYOR           shift and go to state 94
+    MENOR           shift and go to state 95
+    ASIGNACION      shift and go to state 96
+    DIFERENTE       shift and go to state 97
+    MAS             reduce using rule 55 (term -> factor .)
+    MENOS           reduce using rule 55 (term -> factor .)
+    RPAREN          reduce using rule 55 (term -> factor .)
+    PRODUCTO        reduce using rule 55 (term -> factor .)
+    DIVISION        reduce using rule 55 (term -> factor .)
+    POTENCIA        reduce using rule 55 (term -> factor .)
 
-  ! MAYOR           [ reduce using rule 54 (term -> factor .) ]
-  ! MENOR           [ reduce using rule 54 (term -> factor .) ]
+  ! MAYOR           [ reduce using rule 55 (term -> factor .) ]
+  ! MENOR           [ reduce using rule 55 (term -> factor .) ]
 
 
-state 91
+state 92
 
     (19) if -> IF LPAREN condicion RPAREN . then
     (20) if -> IF LPAREN condicion RPAREN . then else
     (34) then -> . LLLAVES sentencias RLLAVES
 
-    LLLAVES         shift and go to state 112
+    LLLAVES         shift and go to state 113
 
-    then                           shift and go to state 111
-
-state 92
-
-    (44) condicion -> factor IGUAL . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
-
-    NEW             shift and go to state 28
-    NUMERO          shift and go to state 29
-    FLOTANTE        shift and go to state 30
-    PALABRA         shift and go to state 53
-    STRING          shift and go to state 31
-    LPAREN          shift and go to state 22
-    LISTA           shift and go to state 52
-    BOOLEANO        shift and go to state 32
-    OBJETO          shift and go to state 33
-
-    factor                         shift and go to state 113
+    then                           shift and go to state 112
 
 state 93
 
-    (45) condicion -> factor MAYOR . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (44) condicion -> factor IGUAL . factor
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1735,16 +1727,16 @@ state 93
 
 state 94
 
-    (46) condicion -> factor MENOR . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (45) condicion -> factor MAYOR . factor
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1760,16 +1752,16 @@ state 94
 
 state 95
 
-    (47) condicion -> factor ASIGNACION . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (46) condicion -> factor MENOR . factor
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1785,16 +1777,16 @@ state 95
 
 state 96
 
-    (49) condicion -> factor DIFERENTE . factor
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (47) condicion -> factor ASIGNACION . factor
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1810,13 +1802,38 @@ state 96
 
 state 97
 
+    (49) condicion -> factor DIFERENTE . factor
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
+
+    NEW             shift and go to state 28
+    NUMERO          shift and go to state 29
+    FLOTANTE        shift and go to state 30
+    PALABRA         shift and go to state 53
+    STRING          shift and go to state 31
+    LPAREN          shift and go to state 22
+    LISTA           shift and go to state 52
+    BOOLEANO        shift and go to state 32
+    OBJETO          shift and go to state 33
+
+    factor                         shift and go to state 118
+
+state 98
+
     (48) condicion -> NOT factor .
 
     RPAREN          reduce using rule 48 (condicion -> NOT factor .)
     PUNTOCOMA       reduce using rule 48 (condicion -> NOT factor .)
 
 
-state 98
+state 99
 
     (50) condicion -> compuesta AND . condicion
     (44) condicion -> . factor IGUAL factor
@@ -1828,56 +1845,20 @@ state 98
     (50) condicion -> . compuesta AND condicion
     (51) condicion -> . compuesta OR condicion
     (52) condicion -> . compuesta
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
-    (53) compuesta -> . LPAREN condicion RPAREN
+    (53) condicion -> . NEWLINE
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
+    (54) compuesta -> . LPAREN condicion RPAREN
 
     NOT             shift and go to state 76
-    NEW             shift and go to state 28
-    NUMERO          shift and go to state 29
-    FLOTANTE        shift and go to state 30
-    PALABRA         shift and go to state 53
-    STRING          shift and go to state 31
-    LPAREN          shift and go to state 73
-    LISTA           shift and go to state 52
-    BOOLEANO        shift and go to state 32
-    OBJETO          shift and go to state 33
-
-    compuesta                      shift and go to state 77
-    condicion                      shift and go to state 118
-    factor                         shift and go to state 75
-
-state 99
-
-    (51) condicion -> compuesta OR . condicion
-    (44) condicion -> . factor IGUAL factor
-    (45) condicion -> . factor MAYOR factor
-    (46) condicion -> . factor MENOR factor
-    (47) condicion -> . factor ASIGNACION factor
-    (48) condicion -> . NOT factor
-    (49) condicion -> . factor DIFERENTE factor
-    (50) condicion -> . compuesta AND condicion
-    (51) condicion -> . compuesta OR condicion
-    (52) condicion -> . compuesta
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
-    (53) compuesta -> . LPAREN condicion RPAREN
-
-    NOT             shift and go to state 76
+    NEWLINE         shift and go to state 78
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
     FLOTANTE        shift and go to state 30
@@ -1894,21 +1875,61 @@ state 99
 
 state 100
 
-    (22) while -> WHILE LPAREN condicion RPAREN . then
-    (34) then -> . LLLAVES sentencias RLLAVES
+    (51) condicion -> compuesta OR . condicion
+    (44) condicion -> . factor IGUAL factor
+    (45) condicion -> . factor MAYOR factor
+    (46) condicion -> . factor MENOR factor
+    (47) condicion -> . factor ASIGNACION factor
+    (48) condicion -> . NOT factor
+    (49) condicion -> . factor DIFERENTE factor
+    (50) condicion -> . compuesta AND condicion
+    (51) condicion -> . compuesta OR condicion
+    (52) condicion -> . compuesta
+    (53) condicion -> . NEWLINE
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
+    (54) compuesta -> . LPAREN condicion RPAREN
 
-    LLLAVES         shift and go to state 112
+    NOT             shift and go to state 76
+    NEWLINE         shift and go to state 78
+    NEW             shift and go to state 28
+    NUMERO          shift and go to state 29
+    FLOTANTE        shift and go to state 30
+    PALABRA         shift and go to state 53
+    STRING          shift and go to state 31
+    LPAREN          shift and go to state 73
+    LISTA           shift and go to state 52
+    BOOLEANO        shift and go to state 32
+    OBJETO          shift and go to state 33
 
-    then                           shift and go to state 120
+    compuesta                      shift and go to state 77
+    condicion                      shift and go to state 120
+    factor                         shift and go to state 75
 
 state 101
 
-    (23) for -> FOR LPAREN VAR condicion . PUNTOCOMA condicion PUNTOCOMA instruccion RPAREN then
+    (22) while -> WHILE LPAREN condicion RPAREN . then
+    (34) then -> . LLLAVES sentencias RLLAVES
 
-    PUNTOCOMA       shift and go to state 121
+    LLLAVES         shift and go to state 113
 
+    then                           shift and go to state 121
 
 state 102
+
+    (23) for -> FOR LPAREN VAR condicion . PUNTOCOMA condicion PUNTOCOMA instruccion RPAREN then
+
+    PUNTOCOMA       shift and go to state 122
+
+
+state 103
 
     (17) imprimir -> PROMPT LPAREN factor RPAREN .
 
@@ -1916,18 +1937,18 @@ state 102
     RLLAVES         reduce using rule 17 (imprimir -> PROMPT LPAREN factor RPAREN .)
 
 
-state 103
+state 104
 
     (18) imprimir -> CONSOLE PUNTO LOG LPAREN . factor RPAREN
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1939,16 +1960,16 @@ state 103
     BOOLEANO        shift and go to state 32
     OBJETO          shift and go to state 33
 
-    factor                         shift and go to state 122
-
-state 104
-
-    (55) factor -> NEW SET LPAREN LISTA . RPAREN
-
-    RPAREN          shift and go to state 123
-
+    factor                         shift and go to state 123
 
 state 105
+
+    (56) factor -> NEW SET LPAREN LISTA . RPAREN
+
+    RPAREN          shift and go to state 124
+
+
+state 106
 
     (25) include -> factor INCLUDE LPAREN factor RPAREN .
 
@@ -1956,7 +1977,7 @@ state 105
     RLLAVES         reduce using rule 25 (include -> factor INCLUDE LPAREN factor RPAREN .)
 
 
-state 106
+state 107
 
     (27) chartAt -> factor CHARTAT LPAREN factor RPAREN .
 
@@ -1964,7 +1985,7 @@ state 106
     RLLAVES         reduce using rule 27 (chartAt -> factor CHARTAT LPAREN factor RPAREN .)
 
 
-state 107
+state 108
 
     (28) push -> factor PUSH LPAREN factor RPAREN .
 
@@ -1972,18 +1993,18 @@ state 107
     RLLAVES         reduce using rule 28 (push -> factor PUSH LPAREN factor RPAREN .)
 
 
-state 108
+state 109
 
     (29) slice -> factor SLICE LPAREN factor COMA . factor RPAREN
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -1995,9 +2016,9 @@ state 108
     BOOLEANO        shift and go to state 32
     OBJETO          shift and go to state 33
 
-    factor                         shift and go to state 124
+    factor                         shift and go to state 125
 
-state 109
+state 110
 
     (31) concat -> factor CONCAT LPAREN factor RPAREN .
 
@@ -2005,17 +2026,17 @@ state 109
     RLLAVES         reduce using rule 31 (concat -> factor CONCAT LPAREN factor RPAREN .)
 
 
-state 110
-
-    (53) compuesta -> LPAREN condicion RPAREN .
-
-    AND             reduce using rule 53 (compuesta -> LPAREN condicion RPAREN .)
-    OR              reduce using rule 53 (compuesta -> LPAREN condicion RPAREN .)
-    RPAREN          reduce using rule 53 (compuesta -> LPAREN condicion RPAREN .)
-    PUNTOCOMA       reduce using rule 53 (compuesta -> LPAREN condicion RPAREN .)
-
-
 state 111
+
+    (54) compuesta -> LPAREN condicion RPAREN .
+
+    AND             reduce using rule 54 (compuesta -> LPAREN condicion RPAREN .)
+    OR              reduce using rule 54 (compuesta -> LPAREN condicion RPAREN .)
+    RPAREN          reduce using rule 54 (compuesta -> LPAREN condicion RPAREN .)
+    PUNTOCOMA       reduce using rule 54 (compuesta -> LPAREN condicion RPAREN .)
+
+
+state 112
 
     (19) if -> IF LPAREN condicion RPAREN then .
     (20) if -> IF LPAREN condicion RPAREN then . else
@@ -2023,11 +2044,11 @@ state 111
 
     $end            reduce using rule 19 (if -> IF LPAREN condicion RPAREN then .)
     RLLAVES         reduce using rule 19 (if -> IF LPAREN condicion RPAREN then .)
-    ELSE            shift and go to state 126
+    ELSE            shift and go to state 127
 
-    else                           shift and go to state 125
+    else                           shift and go to state 126
 
-state 112
+state 113
 
     (34) then -> LLLAVES . sentencias RLLAVES
     (1) sentencias -> . asignacion
@@ -2067,18 +2088,18 @@ state 112
     (29) slice -> . factor SLICE LPAREN factor COMA factor RPAREN
     (30) pop -> . factor POP
     (31) concat -> . factor CONCAT LPAREN factor RPAREN
-    (54) term -> . factor
+    (55) term -> . factor
     (17) imprimir -> . PROMPT LPAREN factor RPAREN
     (18) imprimir -> . CONSOLE PUNTO LOG LPAREN factor RPAREN
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEWLINE         shift and go to state 5
     PALABRA         shift and go to state 17
@@ -2096,7 +2117,7 @@ state 112
     BOOLEANO        shift and go to state 32
     OBJETO          shift and go to state 33
 
-    sentencias                     shift and go to state 127
+    sentencias                     shift and go to state 128
     asignacion                     shift and go to state 2
     expresion                      shift and go to state 3
     metodos                        shift and go to state 4
@@ -2115,7 +2136,7 @@ state 112
     factor                         shift and go to state 19
     imprimir                       shift and go to state 20
 
-state 113
+state 114
 
     (44) condicion -> factor IGUAL factor .
 
@@ -2123,7 +2144,7 @@ state 113
     PUNTOCOMA       reduce using rule 44 (condicion -> factor IGUAL factor .)
 
 
-state 114
+state 115
 
     (45) condicion -> factor MAYOR factor .
 
@@ -2131,7 +2152,7 @@ state 114
     PUNTOCOMA       reduce using rule 45 (condicion -> factor MAYOR factor .)
 
 
-state 115
+state 116
 
     (46) condicion -> factor MENOR factor .
 
@@ -2139,7 +2160,7 @@ state 115
     PUNTOCOMA       reduce using rule 46 (condicion -> factor MENOR factor .)
 
 
-state 116
+state 117
 
     (47) condicion -> factor ASIGNACION factor .
 
@@ -2147,7 +2168,7 @@ state 116
     PUNTOCOMA       reduce using rule 47 (condicion -> factor ASIGNACION factor .)
 
 
-state 117
+state 118
 
     (49) condicion -> factor DIFERENTE factor .
 
@@ -2155,7 +2176,7 @@ state 117
     PUNTOCOMA       reduce using rule 49 (condicion -> factor DIFERENTE factor .)
 
 
-state 118
+state 119
 
     (50) condicion -> compuesta AND condicion .
 
@@ -2163,7 +2184,7 @@ state 118
     PUNTOCOMA       reduce using rule 50 (condicion -> compuesta AND condicion .)
 
 
-state 119
+state 120
 
     (51) condicion -> compuesta OR condicion .
 
@@ -2171,7 +2192,7 @@ state 119
     PUNTOCOMA       reduce using rule 51 (condicion -> compuesta OR condicion .)
 
 
-state 120
+state 121
 
     (22) while -> WHILE LPAREN condicion RPAREN then .
 
@@ -2179,7 +2200,7 @@ state 120
     RLLAVES         reduce using rule 22 (while -> WHILE LPAREN condicion RPAREN then .)
 
 
-state 121
+state 122
 
     (23) for -> FOR LPAREN VAR condicion PUNTOCOMA . condicion PUNTOCOMA instruccion RPAREN then
     (44) condicion -> . factor IGUAL factor
@@ -2191,18 +2212,20 @@ state 121
     (50) condicion -> . compuesta AND condicion
     (51) condicion -> . compuesta OR condicion
     (52) condicion -> . compuesta
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
-    (53) compuesta -> . LPAREN condicion RPAREN
+    (53) condicion -> . NEWLINE
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
+    (54) compuesta -> . LPAREN condicion RPAREN
 
     NOT             shift and go to state 76
+    NEWLINE         shift and go to state 78
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
     FLOTANTE        shift and go to state 30
@@ -2213,55 +2236,55 @@ state 121
     BOOLEANO        shift and go to state 32
     OBJETO          shift and go to state 33
 
-    condicion                      shift and go to state 128
+    condicion                      shift and go to state 129
     factor                         shift and go to state 75
     compuesta                      shift and go to state 77
 
-state 122
-
-    (18) imprimir -> CONSOLE PUNTO LOG LPAREN factor . RPAREN
-
-    RPAREN          shift and go to state 129
-
-
 state 123
 
-    (55) factor -> NEW SET LPAREN LISTA RPAREN .
-
-    INCLUDE         reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    VALUEOF         reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    CHARTAT         reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    PUSH            reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    SLICE           reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    POP             reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    CONCAT          reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    MAS             reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    MENOS           reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    MAYOR           reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    MENOR           reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    PRODUCTO        reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    DIVISION        reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    POTENCIA        reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    $end            reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    RPAREN          reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    RLLAVES         reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    IGUAL           reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    ASIGNACION      reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    DIFERENTE       reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    COMA            reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    PUNTOCOMA       reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    ASCENDER        reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-    DESCENDER       reduce using rule 55 (factor -> NEW SET LPAREN LISTA RPAREN .)
-
-
-state 124
-
-    (29) slice -> factor SLICE LPAREN factor COMA factor . RPAREN
+    (18) imprimir -> CONSOLE PUNTO LOG LPAREN factor . RPAREN
 
     RPAREN          shift and go to state 130
 
 
+state 124
+
+    (56) factor -> NEW SET LPAREN LISTA RPAREN .
+
+    INCLUDE         reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    VALUEOF         reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    CHARTAT         reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    PUSH            reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    SLICE           reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    POP             reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    CONCAT          reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    MAS             reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    MENOS           reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    MAYOR           reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    MENOR           reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    PRODUCTO        reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    DIVISION        reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    POTENCIA        reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    $end            reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    RPAREN          reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    RLLAVES         reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    IGUAL           reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    ASIGNACION      reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    DIFERENTE       reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    COMA            reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    PUNTOCOMA       reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    ASCENDER        reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+    DESCENDER       reduce using rule 56 (factor -> NEW SET LPAREN LISTA RPAREN .)
+
+
 state 125
+
+    (29) slice -> factor SLICE LPAREN factor COMA factor . RPAREN
+
+    RPAREN          shift and go to state 131
+
+
+state 126
 
     (20) if -> IF LPAREN condicion RPAREN then else .
 
@@ -2269,30 +2292,30 @@ state 125
     RLLAVES         reduce using rule 20 (if -> IF LPAREN condicion RPAREN then else .)
 
 
-state 126
+state 127
 
     (21) else -> ELSE . then
     (34) then -> . LLLAVES sentencias RLLAVES
 
-    LLLAVES         shift and go to state 112
+    LLLAVES         shift and go to state 113
 
-    then                           shift and go to state 131
-
-state 127
-
-    (34) then -> LLLAVES sentencias . RLLAVES
-
-    RLLAVES         shift and go to state 132
-
+    then                           shift and go to state 132
 
 state 128
 
-    (23) for -> FOR LPAREN VAR condicion PUNTOCOMA condicion . PUNTOCOMA instruccion RPAREN then
+    (34) then -> LLLAVES sentencias . RLLAVES
 
-    PUNTOCOMA       shift and go to state 133
+    RLLAVES         shift and go to state 133
 
 
 state 129
+
+    (23) for -> FOR LPAREN VAR condicion PUNTOCOMA condicion . PUNTOCOMA instruccion RPAREN then
+
+    PUNTOCOMA       shift and go to state 134
+
+
+state 130
 
     (18) imprimir -> CONSOLE PUNTO LOG LPAREN factor RPAREN .
 
@@ -2300,7 +2323,7 @@ state 129
     RLLAVES         reduce using rule 18 (imprimir -> CONSOLE PUNTO LOG LPAREN factor RPAREN .)
 
 
-state 130
+state 131
 
     (29) slice -> factor SLICE LPAREN factor COMA factor RPAREN .
 
@@ -2308,7 +2331,7 @@ state 130
     RLLAVES         reduce using rule 29 (slice -> factor SLICE LPAREN factor COMA factor RPAREN .)
 
 
-state 131
+state 132
 
     (21) else -> ELSE then .
 
@@ -2316,7 +2339,7 @@ state 131
     RLLAVES         reduce using rule 21 (else -> ELSE then .)
 
 
-state 132
+state 133
 
     (34) then -> LLLAVES sentencias RLLAVES .
 
@@ -2325,20 +2348,20 @@ state 132
     RLLAVES         reduce using rule 34 (then -> LLLAVES sentencias RLLAVES .)
 
 
-state 133
+state 134
 
     (23) for -> FOR LPAREN VAR condicion PUNTOCOMA condicion PUNTOCOMA . instruccion RPAREN then
     (32) instruccion -> . factor ASCENDER
     (33) instruccion -> . factor DESCENDER
-    (55) factor -> . NEW SET LPAREN LISTA RPAREN
-    (56) factor -> . NUMERO
-    (57) factor -> . FLOTANTE
-    (58) factor -> . PALABRA
-    (59) factor -> . STRING
-    (60) factor -> . LPAREN expresion RPAREN
-    (61) factor -> . LISTA
-    (62) factor -> . BOOLEANO
-    (63) factor -> . OBJETO
+    (56) factor -> . NEW SET LPAREN LISTA RPAREN
+    (57) factor -> . NUMERO
+    (58) factor -> . FLOTANTE
+    (59) factor -> . PALABRA
+    (60) factor -> . STRING
+    (61) factor -> . LPAREN expresion RPAREN
+    (62) factor -> . LISTA
+    (63) factor -> . BOOLEANO
+    (64) factor -> . OBJETO
 
     NEW             shift and go to state 28
     NUMERO          shift and go to state 29
@@ -2350,49 +2373,49 @@ state 133
     BOOLEANO        shift and go to state 32
     OBJETO          shift and go to state 33
 
-    instruccion                    shift and go to state 134
-    factor                         shift and go to state 135
-
-state 134
-
-    (23) for -> FOR LPAREN VAR condicion PUNTOCOMA condicion PUNTOCOMA instruccion . RPAREN then
-
-    RPAREN          shift and go to state 136
-
+    instruccion                    shift and go to state 135
+    factor                         shift and go to state 136
 
 state 135
 
-    (32) instruccion -> factor . ASCENDER
-    (33) instruccion -> factor . DESCENDER
+    (23) for -> FOR LPAREN VAR condicion PUNTOCOMA condicion PUNTOCOMA instruccion . RPAREN then
 
-    ASCENDER        shift and go to state 137
-    DESCENDER       shift and go to state 138
+    RPAREN          shift and go to state 137
 
 
 state 136
 
+    (32) instruccion -> factor . ASCENDER
+    (33) instruccion -> factor . DESCENDER
+
+    ASCENDER        shift and go to state 138
+    DESCENDER       shift and go to state 139
+
+
+state 137
+
     (23) for -> FOR LPAREN VAR condicion PUNTOCOMA condicion PUNTOCOMA instruccion RPAREN . then
     (34) then -> . LLLAVES sentencias RLLAVES
 
-    LLLAVES         shift and go to state 112
+    LLLAVES         shift and go to state 113
 
-    then                           shift and go to state 139
+    then                           shift and go to state 140
 
-state 137
+state 138
 
     (32) instruccion -> factor ASCENDER .
 
     RPAREN          reduce using rule 32 (instruccion -> factor ASCENDER .)
 
 
-state 138
+state 139
 
     (33) instruccion -> factor DESCENDER .
 
     RPAREN          reduce using rule 33 (instruccion -> factor DESCENDER .)
 
 
-state 139
+state 140
 
     (23) for -> FOR LPAREN VAR condicion PUNTOCOMA condicion PUNTOCOMA instruccion RPAREN then .
 
@@ -2402,5 +2425,5 @@ state 139
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for MAYOR in state 90 resolved as shift
-WARNING: shift/reduce conflict for MENOR in state 90 resolved as shift
+WARNING: shift/reduce conflict for MAYOR in state 91 resolved as shift
+WARNING: shift/reduce conflict for MENOR in state 91 resolved as shift
