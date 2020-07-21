@@ -1,19 +1,25 @@
 import ply.yacc as sintaxis
 import LexProyecto
+
 tokens = LexProyecto.tokens
 errorstr = ""
 line = 0
+errores = []
+
+
 def p_sentencias(p):
     '''sentencias : asignacion
     | expresion
-    | metodos
+    | imprimir
     | NEWLINE
     '''
     p[0] = p[1]
-    line = p.lineno(1)   
 
 
-def p_sentencias_control(p):
+# line = p.lineno(1)
+
+
+def p_control(p):
     '''sentencias : if
     | while
     | for
@@ -28,30 +34,27 @@ def p_sentencias_control(p):
     p[0] = p[1]
 
 
-def p_metodos(p):
-    'metodos : imprimir'
-    p[0]=('IMPRIMIR')
-
-
 def p_imprimir(p):
     'imprimir : PROMPT LPAREN factor RPAREN'
-    p[0]= ('PROMPT')
+    p[0] = ('PROMPT')
 
 
 def p_imprimir_consola(p):
     '''imprimir : CONSOLE PUNTO LOG LPAREN factor RPAREN'''
+    p[0] = ('CONSOLE')
 
 
 def p_if(p):
     '''if : IF LPAREN condicion RPAREN then
     | IF LPAREN condicion RPAREN then else
     '''
-    p[0]=('IF')
+    p[0] = ('IF')
 
 
 def p_else(p):
     'else : ELSE then'
-    p[0]= ('ELSE')
+    p[0] = ('ELSE')
+
 
 def p_while(p):
     'while : WHILE LPAREN condicion RPAREN then'
@@ -64,23 +67,23 @@ def p_for(p):
 
 
 def p_sort(p):
-    'sort : LISTA SORT'
-    p[0]= ('SORT')
+    'sort : PALABRA SORT'
+    p[0] = ('SORT')
 
 
 def p_include(p):
     'include : factor INCLUDE LPAREN factor RPAREN'
-    p[0]= ('INCLUDE')
+    p[0] = ('INCLUDE')
 
 
 def p_valueOf(p):
     'valueOf : factor VALUEOF'
-    p[0]= ('VALUEOF')
+    p[0] = ('VALUEOF')
 
 
 def p_charAt(p):
     'chartAt : factor CHARTAT LPAREN factor RPAREN'
-    p[0]= ('CHARAT')
+    p[0] = ('CHARAT')
 
 
 def p_push(p):
@@ -109,8 +112,7 @@ def p_instruccion(p):
 
 
 def p_then(p):
-    '''then : LLLAVES sentencias RLLAVES'''
-
+    '''then : LLLAVES sentencias RLLAVES '''
 
 
 def p_asignacion(p):
@@ -119,16 +121,14 @@ def p_asignacion(p):
     p[0] = ('ASIGNACION')
 
 
-
 def p_expresion_suma(p):
     'expresion : term MAS factor'
-    p[0] = p[1] + p[3]
-
+    p[0] = print(p[1] + p[3])
 
 
 def p_expresion_resta(p):
     'expresion : term MENOS factor'
-    p[0] = p[1] - p[3]
+    p[0] = print(p[1] - p[3])
 
 
 def p_expression_term(p):
@@ -138,30 +138,30 @@ def p_expression_term(p):
 
 def p_expresion_producto(p):
     'expresion : expresion PRODUCTO term'
-    p[0] = p[1] * p[3]
+    p[0] = print(p[1] * p[3])
 
 
 def p_expresion_division(p):
     'expresion : expresion DIVISION term'
-    p[0] = p[1] / p[3]
+    p[0] = print(p[1] / p[3])
 
 
 def p_expresion_potencia(p):
     'expresion : expresion POTENCIA term'
-    p[0] = p[1] ** p[3]
+    p[0] = print(p[1] ** p[3])
 
 
 def p_expresion_mayor(p):
     'expresion : term MAYOR factor'
-    p[0] = p[1] > p[3]
+    p[0] = print(p[1] > p[3])
 
 
 def p_expresion_menor(p):
     'expresion : term MENOR factor'
-    p[0] = p[1] < p[3]
+    p[0] = print(p[1] < p[3])
 
 
-#validar con expresiones
+# validar con expresiones
 def p_condicion(p):
     '''condicion : factor IGUAL factor
     | factor MAYOR factor
@@ -172,7 +172,6 @@ def p_condicion(p):
     | compuesta AND condicion
     | compuesta OR condicion
     | compuesta
-    | NEWLINE
     '''
 
 
@@ -187,7 +186,7 @@ def p_term_factor(p):
 
 def p_factor_set(p):
     'factor : NEW SET LPAREN LISTA RPAREN'
-    p[0]=('CONJUNTO')
+    p[0] = ('CONJUNTO')
 
 
 def p_factor_num(p):
@@ -225,36 +224,18 @@ def p_factor_booleano(p):
     p[0] = ('BOOLEANO')
 
 
-def p_factor_objeto (p):
+def p_factor_objeto(p):
     'factor : OBJETO'
     p[0] = ('OBJETO')
 
 
-def t_NEWLINE(t):
-    r'\n+'
-    return t
-
-
 def p_error(p):
-    if p:
-        print("Error de Sintaxis en token", p.type)
-        # Just discard the token and tell the parser it's okay.
-        print("Error en linea: ", line)
+    print("Error de Sintaxis en token", p)
+   # print("Error en linea: " + str(p.lineno))
 
-        parser.errok()
-
-    else:
-        print("Error de sintaxis en linea:", line)
-        
-        
 
 # Construir parser
 parser = sintaxis.yacc()
-
-
-
-
-
 
 ##ejemplos pobrar Christian Portilla
 ##CREACION DE UNA LISTA
@@ -272,6 +253,5 @@ parser = sintaxis.yacc()
 ## 5 ===9
 
 
-
-#Ejemplos Karla Burgos
-#IF if((5>4)||(9>0)&&(4>6)){palabra=3}
+# Ejemplos Karla Burgos
+# IF if((5>4)||(9>0)&&(4>6)){palabra=3}

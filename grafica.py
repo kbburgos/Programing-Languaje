@@ -3,6 +3,7 @@ import ply.lex as lex
 from LexProyecto import *
 from YaccProyecto import *
 
+import numpy as np
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QLabel
@@ -62,9 +63,6 @@ def analisisL():
     analizador = lex.lex()
     analizador.input(text)
 
-
-
-
     while True:
         tokenRec = analizador.token()
         if tokenRec != None:
@@ -78,23 +76,27 @@ botonLexer.clicked.connect(analisisL)
 
 ## funcion para darle funcionalidad al lexico
 def analisisS():
+
     text = codigo.toPlainText()
     resultado.clear()
     parser = sintaxis.yacc()
-
-
-
     s = text
-    result = parser.parse(s)
+    arreglo=text.splitlines()
 
-    resultado.appendPlainText(result)
+    """result = parser.parse(s)
+    print(result)"""
+
+    for x in arreglo:
+        result = parser.parse(x)
+        print(result)
+        resultado.appendPlainText(str(result))
 
 
+
+    #print('sdasdasd',resultado)
 
 
 botonSintactico.clicked.connect(analisisS)
-
-
 
 
 ## METODOS PARA MOSTRAR
