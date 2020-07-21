@@ -77,19 +77,19 @@ botonLexer.clicked.connect(analisisL)
 
 
 ## funcion para darle funcionalidad al lexico
-
 def analisisS():
     text = codigo.toPlainText()
     resultado.clear()
     parser = sintaxis.yacc()
 
 
+
     s = text
-    #except EOFError:
-        
     result = parser.parse(s)
+
     resultado.appendPlainText(result)
-    print(result)
+
+
 
 
 botonSintactico.clicked.connect(analisisS)
